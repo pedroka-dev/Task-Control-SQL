@@ -30,7 +30,7 @@ namespace TaskControlSql.ConsoleApp.View
                         return;
 
                     case "1":
-                        //menu = new FriendMenu(controllerFriend, fontColor);
+                        menu = new TodoTaskMenu(fontColor);
                         break;
 
                     default:
@@ -39,7 +39,7 @@ namespace TaskControlSql.ConsoleApp.View
                         continue;
                 }
 
-                //menu.ShowMenu();
+                menu.ShowMenu();
             }
         }
 

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Control\Controller.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\TodoTask.cs" />
     <Compile Include="Program.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="View\MainMenu.cs" />
     <Compile Include="View\Menu.cs" />
     <Compile Include="View\RegistrableMenu.cs" />
+    <Compile Include="View\TodoTaskMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
