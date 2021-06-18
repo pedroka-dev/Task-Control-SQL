@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TaskControlSql.ConsoleApp.View;
 
 namespace TaskControlSql.ConsoleApp
 {
@@ -10,6 +7,8 @@ namespace TaskControlSql.ConsoleApp
     {
         static void Main(string[] args)
         {
+            MainMenu menu = new MainMenu(ConsoleColor.Green);
+            menu.ShowMenu();
         }
     }
 }
