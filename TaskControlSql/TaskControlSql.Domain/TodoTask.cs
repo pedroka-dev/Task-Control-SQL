@@ -25,7 +25,7 @@ namespace TaskControlSql.ConsoleApp.Domain
             this.priority = priority;
             this.title = title;
             this.creationTime = creationTime;
-            this.percentageConcluded = 0;
+            percentageConcluded = 0;
         }
 
         public string Priority { get => priority; }
@@ -34,17 +34,17 @@ namespace TaskControlSql.ConsoleApp.Domain
         public DateTime? ConclusionTime { get => conclusionTime; }
         public float PercentageConcluded { get => percentageConcluded; }
 
-        public void UpdatePercentageConcluded(float porcentage)
+        public void UpdatePercentageConcluded(float percentage)
         {
-            if (percentageConcluded >= 100)
+            if (percentage >= 100)
             {
                 percentageConcluded = 100;
-                this.conclusionTime = DateTime.Now;
+                conclusionTime = DateTime.Now;
             }
-            else if (porcentage >= 0)
+            else if (percentage >= 0)
             {
-                percentageConcluded = porcentage;
-                this.conclusionTime = null;
+                percentageConcluded = percentage;
+                conclusionTime = null;
             }
         }
 
