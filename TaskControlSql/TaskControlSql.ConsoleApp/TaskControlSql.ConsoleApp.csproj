@@ -43,19 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\Controller.cs" />
-    <Compile Include="Control\TodoTaskController.cs" />
-    <Compile Include="Domain\Entity.cs" />
-    <Compile Include="Domain\TodoTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\MainMenu.cs" />
-    <Compile Include="View\Menu.cs" />
-    <Compile Include="View\RegistrableMenu.cs" />
-    <Compile Include="View\TodoTaskMenu.cs" />
+    <Compile Include="MainMenu.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="RegistrableMenu.cs" />
+    <Compile Include="TodoTaskMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskControlSql.Control\TaskControlSql.Control.csproj">
+      <Project>{b1a07800-9241-460d-83d0-f226a99261db}</Project>
+      <Name>TaskControlSql.Control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskControlSql.Domain\TaskControlSql.Domain.csproj">
+      <Project>{c37a131e-a6aa-4bbd-99b1-d30aa3dad5f1}</Project>
+      <Name>TaskControlSql.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
