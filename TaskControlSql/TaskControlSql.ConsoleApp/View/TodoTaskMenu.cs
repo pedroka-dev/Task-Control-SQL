@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskControlSql.ConsoleApp.Control;
 using TaskControlSql.ConsoleApp.Domain;
 
 namespace TaskControlSql.ConsoleApp.View
 {
     class TodoTaskMenu : RegistrableMenu<TodoTask>
     {
-        public TodoTaskMenu(ConsoleColor fontColor)
+        public TodoTaskMenu(TodoTaskController taskController, ConsoleColor fontColor)
         {
+            this.mainController = taskController;
             MenuTypeTitle = "task";
             this.fontColor = fontColor;
         }
-        //int id, string priority, string title, DateTime creationTime, DateTime? conclusionTime, float percentageConcluded
+
         public override void RegisterElement()
         {
             DisplayerHeader("REGISTER TASK");
@@ -25,14 +27,14 @@ namespace TaskControlSql.ConsoleApp.View
             Console.WriteLine(" - Enter the title of the task:");
             string title = Console.ReadLine();
 
-            TodoTask todoTask = new TodoTask(0, priority, title, DateTime.Now, null, 0);
+            TodoTask todoTask = new TodoTask(0, priority, title, DateTime.Now);
             string response = mainController.UpdateEntity(todoTask);
 
             if (response != "OP_SUCCESS")
                 DisplayErrorText(response);
             else
             {
-                DisplaySuccessText("Register Operation Sucessful");
+                DisplaySuccessText("Register Operation Sucessful.");
                 Console.ReadLine();
                 return;
             }
@@ -50,6 +52,11 @@ namespace TaskControlSql.ConsoleApp.View
                 DisplayErrorText("Attribute id must a valid integer.");
                 return;
             }
+            if (!mainController.ExistEntity(id))
+            {
+                DisplayErrorText("Entity id does not exist.");
+                return;
+            }
 
             Console.WriteLine(" - Enter the priority of the task:");
             string priority = Console.ReadLine();
@@ -57,9 +64,21 @@ namespace TaskControlSql.ConsoleApp.View
             Console.WriteLine(" - Enter the title of the task:");
             string title = Console.ReadLine();
 
-            //needs conclusionTime and percentageConcluded
+            TodoTask todoTask = new TodoTask(id, priority, title, DateTime.MinValue);
 
-            TodoTask todoTask = new TodoTask(id, priority, title, DateTime.Now, null, 0);
+            Console.WriteLine(" - Enter the percentage concluded of the task (100 to complete):");
+            string percentageConcludedTxt = Console.ReadLine();
+
+            if (!float.TryParse(percentageConcludedTxt, out float percentageConcluded))
+            {
+                DisplayErrorText("Attribute percentageConcluded must a valid positive float.");
+                return;
+            }
+            else
+            {
+                todoTask.UpdatePercentageConcluded(percentageConcluded);
+            }
+
             string response = mainController.UpdateEntity(todoTask);
 
             if (response != "OP_SUCCESS")

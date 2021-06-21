@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskControlSql.ConsoleApp.Control;
 
 namespace TaskControlSql.ConsoleApp.View
 {
     class MainMenu : Menu
     {
+        TodoTaskController taskController;
+
         public MainMenu(ConsoleColor fontColor)
         {
             this.fontColor = fontColor;
+            taskController = new TodoTaskController();
         }
 
         public override void ShowMenu()
@@ -30,7 +34,7 @@ namespace TaskControlSql.ConsoleApp.View
                         return;
 
                     case "1":
-                        menu = new TodoTaskMenu(fontColor);
+                        menu = new TodoTaskMenu(taskController, fontColor);
                         break;
 
                     default:

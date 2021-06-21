@@ -7,21 +7,18 @@ using TaskControlSql.ConsoleApp.Domain;
 
 namespace TaskControlSql.ConsoleApp.Control
 {
-    class Controller<T> where T : Entity
+    abstract class Controller<T> where T : Entity
     {
-        internal bool DeleteEntity(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string CreateEntity(T entity);
 
-        internal List<T> SelectAllEntities()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool ExistEntity(int index);
 
-        internal string UpdateEntity(TodoTask todoTask)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract T ReceiveEntity(int index);
+
+        public abstract List<T> ReceiveAllEntities();
+
+        public abstract string UpdateEntity(T entity); //DO NOT UPDATE ATTRIBUTE TodoTask.CreationTime
+
+        public abstract bool DeleteEntity(int id);
     }
 }

@@ -84,7 +84,7 @@ namespace TaskControlSql.ConsoleApp.View
 
         public void VisualizeAllElements()
         {
-            List<T> entities = mainController.SelectAllEntities();
+            List<T> entities = mainController.ReceiveAllEntities();
             DisplayerHeader("REGISTERED " + MenuTypeTitle.ToUpper());
             foreach (T e in entities)
             {

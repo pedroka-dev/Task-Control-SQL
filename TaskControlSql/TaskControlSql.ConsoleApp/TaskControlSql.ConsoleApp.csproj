@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\Controller.cs" />
+    <Compile Include="Control\TodoTaskController.cs" />
     <Compile Include="Domain\Entity.cs" />
     <Compile Include="Domain\TodoTask.cs" />
     <Compile Include="Program.cs" />
