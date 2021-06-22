@@ -10,16 +10,12 @@ namespace TaskControlSql.ConsoleApp.Control
         protected int lastRegisteredId = 0;
         protected abstract SqlCommand SqlInsertCommand(T entity,SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlSelectEntity(int id, SqlConnection conectionDatabase);
 
         public string CreateEntity(T entity)
         {
             entity.Id = this.GenerateId();
-
-            string adressDataBase = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False";
-            SqlConnection conectionDatabase = new SqlConnection();
-            conectionDatabase.ConnectionString = adressDataBase;
-            conectionDatabase.Open();
-
+            SqlConnection conectionDatabase = ConnectToDatabase();
             SqlCommand commandInsert = SqlInsertCommand(entity, conectionDatabase);
 
             string operationMessage;
@@ -39,30 +35,44 @@ namespace TaskControlSql.ConsoleApp.Control
 
         public bool ExistEntity(int index)
         {
-            throw new NotImplementedException();
-            //try
-            //{
-            //    return DB.GetExistEntity(index);
-            //}
-            //catch (Exception)
-            //{
-            //    return false;
-            //}
+            SqlConnection conectionDatabase = ConnectToDatabase();
+            SqlCommand commandInsert = SqlSelectEntity(index,conectionDatabase);
+
+            bool result;
+            try
+            {
+                object task = commandInsert.ExecuteScalar();
+                if(task != null)
+                    result = true;
+                else
+                    result = false;
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            conectionDatabase.Close();
+            return result;
         }
 
         public T ReceiveEntity(int index)
         {
-            throw new NotImplementedException();
-            //T entityAux = null;
+            SqlConnection conectionDatabase = ConnectToDatabase();
+            SqlCommand commandInsert = SqlSelectEntity(index, conectionDatabase);
 
-            //try
-            //{
-            //    return DB.GetEntity(index);
-            //}
-            //catch (Exception)
-            //{
-            //    return entityAux;
-            //}
+            T entity;
+            try
+            {
+                entity = (T)commandInsert.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                entity = null;
+            }
+
+            conectionDatabase.Close();
+            return entity;
         }
 
         public List<T> ReceiveAllEntities()
@@ -102,7 +112,7 @@ namespace TaskControlSql.ConsoleApp.Control
 
         public bool DeleteEntity(int index)
         {
-            throw new NotImplementedException();
+            return false;
             //try
             //{
             //    DB.PostDeleteEntity(index);
@@ -116,17 +126,13 @@ namespace TaskControlSql.ConsoleApp.Control
 
         public string DeleteAllEntities()
         {
-            string adressDataBase = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False";
-            SqlConnection conectionDatabase = new SqlConnection();
-            conectionDatabase.ConnectionString = adressDataBase;
-            conectionDatabase.Open();
-
+            SqlConnection conectionDatabase = ConnectToDatabase();
             SqlCommand commandDeleteAll = SqlDeleteAllCommand(conectionDatabase);
 
             string operationMessage;
             try
             {
-                commandDeleteAll.ExecuteNonQuery();
+                commandDeleteAll.ExecuteScalar();
                 operationMessage = "OP_SUCCESS";
             }
             catch (Exception e)
@@ -141,6 +147,14 @@ namespace TaskControlSql.ConsoleApp.Control
         protected int GenerateId()
         {
             return ++lastRegisteredId;
+        }
+
+        protected static SqlConnection ConnectToDatabase()
+        {
+            SqlConnection connection = new SqlConnection();
+            connection.ConnectionString = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False"; ;
+            connection.Open();
+            return connection;
         }
     }
 }

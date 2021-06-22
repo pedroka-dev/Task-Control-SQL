@@ -58,5 +58,20 @@ namespace TaskControlSql.ConsoleApp.Control
 			return command;
 
 		}
-	}
+
+        protected override SqlCommand SqlSelectEntity(int id, SqlConnection conectionDatabase)
+        {
+			SqlCommand command = new SqlCommand();
+			command.Connection = conectionDatabase;
+
+			string sqlInsert = @"SELECT * FROM TodoTask WHERE Id = @Id";
+
+			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
+
+			command.CommandText = sqlInsert;
+
+			command.Parameters.AddWithValue("Id", id);
+			return command;
+		}
+    }
 }

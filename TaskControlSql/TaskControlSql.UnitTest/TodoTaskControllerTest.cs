@@ -83,5 +83,64 @@ namespace TaskControlSql.UnitTest
             Assert.AreEqual(expectedResponse, response2);
             Assert.AreEqual(expectedResponse, response3);
         }
+
+        [TestMethod]
+        public void Should_ReturnFalse_OnExistEntityWithoutTodoTask()
+        {
+            int correctId = 0;
+            string correctPriority = "High";
+            string correctTitle = "Test Task";
+            DateTime correctCreationTime = DateTime.Now;
+            TodoTaskController taskController = new TodoTaskController();
+
+            TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            taskController.DeleteAllEntities();
+            //taskController.CreateEntity(todoTask);
+            bool response = taskController.ExistEntity(todoTask.Id);
+
+            Assert.IsFalse(response);
+        }
+
+        [TestMethod]
+        public void Should_ReturnTrue_OnExistEntityWithOneTodoTask()
+        {
+            int correctId = 0;
+            string correctPriority = "High";
+            string correctTitle = "Test Task";
+            DateTime correctCreationTime = DateTime.Now;
+            TodoTaskController taskController = new TodoTaskController();
+
+            TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            taskController.DeleteAllEntities();
+            taskController.CreateEntity(todoTask);
+            bool response = taskController.ExistEntity(todoTask.Id);
+
+            Assert.IsTrue(response);
+        }
+
+        [TestMethod]
+        public void Should_ReturnTrue_OnExistEntityWithMultipleTodoTask()
+        {
+            int correctId = 0;
+            string correctPriority = "High";
+            string correctTitle = "Test Task";
+            DateTime correctCreationTime = DateTime.Now;
+            TodoTaskController taskController = new TodoTaskController();
+
+            TodoTask todoTask1 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            TodoTask todoTask2 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            TodoTask todoTask3 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            taskController.DeleteAllEntities();
+            taskController.CreateEntity(todoTask1);
+            taskController.CreateEntity(todoTask2);
+            taskController.CreateEntity(todoTask3);
+            bool response1 = taskController.ExistEntity(todoTask1.Id);
+            bool response2 = taskController.ExistEntity(todoTask2.Id);
+            bool response3 = taskController.ExistEntity(todoTask3.Id);
+
+            Assert.IsTrue(response1);
+            Assert.IsTrue(response2);
+            Assert.IsTrue(response3);
+        }
     }
 }
