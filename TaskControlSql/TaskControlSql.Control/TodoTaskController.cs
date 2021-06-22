@@ -11,7 +11,7 @@ namespace TaskControlSql.ConsoleApp.Control
 			SqlCommand command = new SqlCommand();
 			command.Connection = conectionDatabase;
 
-			string sqlInsert = @"INSERT INTO TodoTask
+			string sqlCommand = @"INSERT INTO TodoTask
 	            (
 		            [Id],
 		            [Priority],
@@ -32,7 +32,7 @@ namespace TaskControlSql.ConsoleApp.Control
 
 			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
 
-			command.CommandText = sqlInsert;
+			command.CommandText = sqlCommand;
 
 			command.Parameters.AddWithValue("Id", entity.Id);
 			command.Parameters.AddWithValue("Priority", entity.Priority);
@@ -47,31 +47,91 @@ namespace TaskControlSql.ConsoleApp.Control
 			return command;
 		}
 
+		protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
+		{
+			SqlCommand command = new SqlCommand();
+			command.Connection = conectionDatabase;
+
+			string sqlCommand = @"SELECT * FROM TodoTask WHERE Id = @Id";
+
+			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
+
+			command.CommandText = sqlCommand;
+
+			command.Parameters.AddWithValue("Id", id);
+			return command;
+		}
+
+		protected override SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase)
+		{
+			SqlCommand command = new SqlCommand();
+			command.Connection = conectionDatabase;
+
+			string sqlCommand = @"SELECT * FROM TodoTask";
+
+			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
+
+			command.CommandText = sqlCommand;
+
+			return command;
+		}
+
+
+		protected override SqlCommand SqlUpdateCommand(TodoTask entity, SqlConnection conectionDatabase)
+		{
+			SqlCommand command = new SqlCommand();
+			command.Connection = conectionDatabase;
+
+			string sqlCommand = @"UPDATE TodoTask SET
+		            [Priority] = @Priority,
+		            [Title] = @Title,
+		            [DateConclusion] = @DateConclusion,
+		            [PercentageConcluded] =@PercentageConcluded
+
+				WHERE Id = @Id;";
+
+			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
+
+			command.CommandText = sqlCommand;
+
+			command.Parameters.AddWithValue("Id", entity.Id);
+			command.Parameters.AddWithValue("Priority", entity.Priority);
+			command.Parameters.AddWithValue("Title", entity.Title);
+			if (entity.ConclusionTime == null)
+				command.Parameters.AddWithValue("DateConclusion", DBNull.Value);
+			else
+				command.Parameters.AddWithValue("DateConclusion", entity.ConclusionTime);
+			command.Parameters.AddWithValue("PercentageConcluded", entity.PercentageConcluded);
+
+			return command;
+		}
+
+        protected override SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase)
+        {
+			SqlCommand command = new SqlCommand();
+			command.Connection = conectionDatabase;
+
+			string sqlCommand = @"DELETE FROM TodoTask WHERE Id = @Id";
+
+			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
+
+			command.CommandText = sqlCommand;
+
+			command.Parameters.AddWithValue("Id", id);
+			return command;
+		}
+
+
 		protected override SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase)
 		{
 			SqlCommand command = new SqlCommand();
 			command.Connection = conectionDatabase;
 
-			string sqlDeleteAll = @"DELETE FROM TodoTask";
+			string sqlCommand = @"DELETE FROM TodoTask";
 
-			command.CommandText = sqlDeleteAll;
+			command.CommandText = sqlCommand;
 			return command;
 
-		}
-
-        protected override SqlCommand SqlSelectEntity(int id, SqlConnection conectionDatabase)
-        {
-			SqlCommand command = new SqlCommand();
-			command.Connection = conectionDatabase;
-
-			string sqlInsert = @"SELECT * FROM TodoTask WHERE Id = @Id";
-
-			//sqlInsert += @"SELECT SCOPE_IDENTITY();";
-
-			command.CommandText = sqlInsert;
-
-			command.Parameters.AddWithValue("Id", id);
-			return command;
 		}
     }
 }

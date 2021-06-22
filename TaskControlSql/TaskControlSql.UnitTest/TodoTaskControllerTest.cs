@@ -85,6 +85,76 @@ namespace TaskControlSql.UnitTest
         }
 
         [TestMethod]
+        public void Should_ReturnOpSucess_OnUpdateNewTask()
+        {
+            int correctId = 0;
+            string correctPriority = "High";
+            string correctTitle = "Test Task";
+            DateTime correctCreationTime = DateTime.Now;
+            string newCorrectPriority = "Medium";
+            string newCorrectTitle = "Test Task Updated";
+            DateTime newCorrectCreationTime = DateTime.Now;
+            TodoTaskController taskController = new TodoTaskController();
+            taskController.DeleteAllEntities();
+
+            TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
+            taskController.CreateEntity(todoTask);
+            string response = taskController.UpdateEntity(updatedTodoTask);
+
+
+            string expectedResponse = "OP_SUCCESS";
+            Assert.AreEqual(expectedResponse, response);
+        }
+
+        [TestMethod]
+        public void Should_ReturnOpSucess_OnUpdateInProgressTask()
+        {
+            int correctId = 0;
+            string correctPriority = "High";
+            string correctTitle = "Test Task";
+            DateTime correctCreationTime = DateTime.Now;
+            string newCorrectPriority = "Medium";
+            string newCorrectTitle = "Test Task Updated";
+            DateTime newCorrectCreationTime = DateTime.Now;
+            TodoTaskController taskController = new TodoTaskController();
+            taskController.DeleteAllEntities();
+
+            TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
+            updatedTodoTask.UpdatePercentageConcluded(50);
+            taskController.CreateEntity(todoTask);
+            string response = taskController.UpdateEntity(updatedTodoTask);
+
+
+            string expectedResponse = "OP_SUCCESS";
+            Assert.AreEqual(expectedResponse, response);
+        }
+
+        [TestMethod]
+        public void Should_ReturnOpSucess_OnUpdateConcludedTask()
+        {
+            int correctId = 0;
+            string correctPriority = "High";
+            string correctTitle = "Test Task";
+            DateTime correctCreationTime = DateTime.Now;
+            string newCorrectPriority = "Medium";
+            string newCorrectTitle = "Test Task Updated";
+            DateTime newCorrectCreationTime = DateTime.Now;
+            TodoTaskController taskController = new TodoTaskController();
+            taskController.DeleteAllEntities();
+
+            TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
+            updatedTodoTask.UpdatePercentageConcluded(100);
+            taskController.CreateEntity(todoTask);
+            string response = taskController.UpdateEntity(updatedTodoTask);
+
+            string expectedResponse = "OP_SUCCESS";
+            Assert.AreEqual(expectedResponse, response);
+        }
+
+        [TestMethod]
         public void Should_ReturnFalse_OnExistEntityWithoutTodoTask()
         {
             int correctId = 0;
@@ -95,7 +165,6 @@ namespace TaskControlSql.UnitTest
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             taskController.DeleteAllEntities();
-            //taskController.CreateEntity(todoTask);
             bool response = taskController.ExistEntity(todoTask.Id);
 
             Assert.IsFalse(response);

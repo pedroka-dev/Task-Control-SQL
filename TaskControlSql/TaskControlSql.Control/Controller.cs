@@ -9,19 +9,23 @@ namespace TaskControlSql.ConsoleApp.Control
     {
         protected int lastRegisteredId = 0;
         protected abstract SqlCommand SqlInsertCommand(T entity,SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlUpdateCommand(T entity, SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlSelectEntity(int id, SqlConnection conectionDatabase);
+        
 
         public string CreateEntity(T entity)
         {
             entity.Id = this.GenerateId();
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandInsert = SqlInsertCommand(entity, conectionDatabase);
+            SqlCommand commandInsertEntity = SqlInsertCommand(entity, conectionDatabase);
 
             string operationMessage;
             try
             {
-                commandInsert.ExecuteScalar();
+                commandInsertEntity.ExecuteScalar();
                 operationMessage = "OP_SUCCESS";
             }
             catch (Exception e)
@@ -36,12 +40,12 @@ namespace TaskControlSql.ConsoleApp.Control
         public bool ExistEntity(int index)
         {
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandInsert = SqlSelectEntity(index,conectionDatabase);
+            SqlCommand commandExistEntity = SqlSelectEntityCommand(index,conectionDatabase);
 
             bool result;
             try
             {
-                object task = commandInsert.ExecuteScalar();
+                object task = commandExistEntity.ExecuteScalar();
                 if(task != null)
                     result = true;
                 else
@@ -59,12 +63,12 @@ namespace TaskControlSql.ConsoleApp.Control
         public T ReceiveEntity(int index)
         {
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandInsert = SqlSelectEntity(index, conectionDatabase);
+            SqlCommand commandReceiveEntity = SqlSelectEntityCommand(index, conectionDatabase);
 
             T entity;
             try
             {
-                entity = (T)commandInsert.ExecuteScalar();
+                entity = (T)commandReceiveEntity.ExecuteScalar();
             }
             catch (Exception e)
             {
@@ -77,51 +81,65 @@ namespace TaskControlSql.ConsoleApp.Control
 
         public List<T> ReceiveAllEntities()
         {
-            throw new NotImplementedException();
-            //List<T> entityAux = null;
+            SqlConnection conectionDatabase = ConnectToDatabase();
+            SqlCommand commandReceiveEntity = SqlSelectAllCommand( conectionDatabase);
 
-            //try
-            //{
-            //    return DB.GetAllEntities();
-            //}
-            //catch (Exception)
-            //{
-            //    return entityAux;
-            //}
+            List<T> entities;
+            try
+            {
+                entities = (List<T>)commandReceiveEntity.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                entities = null;
+            }
 
+            conectionDatabase.Close();
+            return entities;
         }
 
-        public string UpdateEntity(T entity)   //DO NOT UPDATE ATTRIBUTE TodoTask.CreationTime
+        public string UpdateEntity(T entity)
         {
-            throw new NotImplementedException();
-            //string operationMessage;
+            entity.Id = this.GenerateId();
+            SqlConnection conectionDatabase = ConnectToDatabase();
+            SqlCommand commandUpdate = SqlUpdateCommand(entity, conectionDatabase);
 
-            //try
-            //{
-            //    entity.Id = this.GenerateId();
-            //    DB.PostUpdateEntity(entity);
-            //    operationMessage = "OP_SUCCESS";
-            //}
-            //catch (Exception e)
-            //{
-            //    operationMessage = "Error: " + e.Message;
-            //}
+            string operationMessage;
+            try
+            {
+                commandUpdate.ExecuteScalar();
+                operationMessage = "OP_SUCCESS";
+            }
+            catch (Exception e)
+            {
+                operationMessage = "Error: " + e.Message;
+            }
 
-            //return operationMessage;
+            conectionDatabase.Close();
+            return operationMessage;
         }
 
         public bool DeleteEntity(int index)
         {
-            return false;
-            //try
-            //{
-            //    DB.PostDeleteEntity(index);
-            //    return true;
-            //}
-            //catch (Exception)
-            //{
-            //    return false;
-            //}
+            SqlConnection conectionDatabase = ConnectToDatabase();
+            SqlCommand commandDeleteEntity = SqlDeleteEntityCommand(index, conectionDatabase);
+
+            bool result;
+            try
+            {
+                object task = commandDeleteEntity.ExecuteScalar();
+                if (task != null)
+                    result = true;
+                else
+                    result = false;
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            conectionDatabase.Close();
+            return result;
         }
 
         public string DeleteAllEntities()

@@ -83,9 +83,12 @@ namespace TaskControlSql.ConsoleApp.View
         {
             List<T> entities = mainController.ReceiveAllEntities();
             DisplayerHeader("REGISTERED " + MenuTypeTitle.ToUpper());
-            foreach (T e in entities)
+            if (entities != null)
             {
-                Console.WriteLine("  - " + e.ToString());
+                foreach (T e in entities)
+                {
+                    Console.WriteLine("  - " + e.ToString());
+                }
             }
         }
 
