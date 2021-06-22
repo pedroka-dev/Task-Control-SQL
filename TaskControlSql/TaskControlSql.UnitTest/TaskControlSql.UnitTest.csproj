@@ -51,11 +51,16 @@
   <ItemGroup>
     <Compile Include="TodoTaskTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TodoTaskControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TaskControlSql.Control\TaskControlSql.Control.csproj">
+      <Project>{B1A07800-9241-460D-83D0-F226A99261DB}</Project>
+      <Name>TaskControlSql.Control</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TaskControlSql.Domain\TaskControlSql.Domain.csproj">
       <Project>{C37A131E-A6AA-4BBD-99B1-D30AA3DAD5F1}</Project>
       <Name>TaskControlSql.Domain</Name>

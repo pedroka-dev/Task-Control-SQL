@@ -26,6 +26,7 @@ namespace TaskControlSql.ConsoleApp.Domain
             this.title = title;
             this.creationTime = creationTime;
             percentageConcluded = 0;
+            conclusionTime = null;
         }
 
         public string Priority { get => priority; }

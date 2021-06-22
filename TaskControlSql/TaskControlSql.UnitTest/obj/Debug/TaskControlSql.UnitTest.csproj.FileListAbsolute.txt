@@ -14,3 +14,5 @@ C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSq
 C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\obj\Debug\TaskControlSql.UnitTest.csproj.CopyComplete
 C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\obj\Debug\TaskControlSql.UnitTest.dll
 C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\obj\Debug\TaskControlSql.UnitTest.pdb
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\TaskControlSql.Control.dll
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\TaskControlSql.Control.pdb

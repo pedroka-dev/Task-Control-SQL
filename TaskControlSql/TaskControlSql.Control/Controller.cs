@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using TaskControlSql.ConsoleApp.Domain;
 
 namespace TaskControlSql.ConsoleApp.Control
@@ -7,16 +8,24 @@ namespace TaskControlSql.ConsoleApp.Control
     public abstract class Controller<T> where T : Entity
     {
         protected int lastRegisteredId = 0;
-        object DB;
+        protected abstract SqlCommand SqlInsertCommand(T entity,SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase);
 
         public string CreateEntity(T entity)
         {
-            string operationMessage;
+            entity.Id = this.GenerateId();
 
+            string adressDataBase = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False";
+            SqlConnection conectionDatabase = new SqlConnection();
+            conectionDatabase.ConnectionString = adressDataBase;
+            conectionDatabase.Open();
+
+            SqlCommand commandInsert = SqlInsertCommand(entity, conectionDatabase);
+
+            string operationMessage;
             try
             {
-                entity.Id = this.GenerateId();
-                //DB.PostCreateEntity(entity);
+                commandInsert.ExecuteScalar();
                 operationMessage = "OP_SUCCESS";
             }
             catch (Exception e)
@@ -24,6 +33,7 @@ namespace TaskControlSql.ConsoleApp.Control
                 operationMessage = "Error: " + e.Message;
             }
 
+            conectionDatabase.Close();
             return operationMessage;
         }
 
@@ -102,6 +112,30 @@ namespace TaskControlSql.ConsoleApp.Control
             //{
             //    return false;
             //}
+        }
+
+        public string DeleteAllEntities()
+        {
+            string adressDataBase = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False";
+            SqlConnection conectionDatabase = new SqlConnection();
+            conectionDatabase.ConnectionString = adressDataBase;
+            conectionDatabase.Open();
+
+            SqlCommand commandDeleteAll = SqlDeleteAllCommand(conectionDatabase);
+
+            string operationMessage;
+            try
+            {
+                commandDeleteAll.ExecuteNonQuery();
+                operationMessage = "OP_SUCCESS";
+            }
+            catch (Exception e)
+            {
+                operationMessage = "Error: " + e.Message;
+            }
+
+            conectionDatabase.Close();
+            return operationMessage;
         }
 
         protected int GenerateId()

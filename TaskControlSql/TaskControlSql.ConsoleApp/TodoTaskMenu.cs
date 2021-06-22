@@ -24,7 +24,7 @@ namespace TaskControlSql.ConsoleApp.View
             string title = Console.ReadLine();
 
             TodoTask todoTask = new TodoTask(0, priority, title, DateTime.Now);
-            string response = mainController.UpdateEntity(todoTask);
+            string response = mainController.CreateEntity(todoTask);
 
             if (response != "OP_SUCCESS")
                 DisplayErrorText(response);
