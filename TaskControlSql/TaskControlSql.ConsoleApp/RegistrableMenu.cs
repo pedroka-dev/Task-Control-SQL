@@ -29,16 +29,17 @@ namespace TaskControlSql.ConsoleApp.View
                 return;
             }
 
-            if (mainController.DeleteEntity(id))
+            if (mainController.ExistEntity(id))
             {
-                DisplaySuccessText("Delete operation sucessful");
-                return;
+                if (mainController.DeleteEntity(id))
+                {
+                    DisplaySuccessText("Delete Entity operation sucessful");
+                    return;
+                }
             }
-            else
-            {
-                DisplayErrorText("Delete operation failed. Element not found.");
-                Console.ReadLine();
-            }
+
+            DisplayErrorText("Delete Entity operation failed. Element not found.");
+            Console.ReadLine();
         }
 
         public override void ShowMenu()
@@ -71,11 +72,32 @@ namespace TaskControlSql.ConsoleApp.View
                         RemoveElement();
                         break;
 
+                    case "5":
+                        RemoveAllElements();
+                        break;
+
                     default:
                         DisplayErrorText("Invalid option. Use only the available options from above.");
                         break;
                 }
                 Console.ReadLine();
+            }
+        }
+
+        private void RemoveAllElements()
+        {
+            Console.WriteLine($" - Are you sure you want to delete all {MenuTypeTitle}? This cannot be undone. <Y = delete>");
+
+            if (Console.ReadLine().ToUpper() == "Y") {
+                string response = mainController.DeleteAllEntities();
+                if (response != "OP_SUCCESS")
+                    DisplayErrorText(response);
+                else
+                {
+                    DisplaySuccessText("Delete All Operation Sucessful");
+                    Console.ReadLine();
+                    return;
+                }
             }
         }
 
@@ -98,6 +120,7 @@ namespace TaskControlSql.ConsoleApp.View
             Console.WriteLine($" - Enter 2 to visualize existing {MenuTypeTitle}.");
             Console.WriteLine($" - Enter 3 to modify an existing {MenuTypeTitle}.");
             Console.WriteLine($" - Enter 4 to remove an existing {MenuTypeTitle}.");
+            Console.WriteLine($" - Enter 5 to remove all existing {MenuTypeTitle}.");
             Console.WriteLine(" - Enter Q to quit.");
 
             string option = Console.ReadLine();

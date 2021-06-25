@@ -40,52 +40,6 @@ USE [$(DatabaseName)];
 
 
 GO
-PRINT N'Starting rebuilding table [dbo].[TodoTask]...';
-
-
-GO
-BEGIN TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-
-SET XACT_ABORT ON;
-
-CREATE TABLE [dbo].[tmp_ms_xx_TodoTask] (
-    [Id]                  INT          IDENTITY (1, 1) NOT NULL,
-    [Priority]            VARCHAR (50) NOT NULL,
-    [Title]               VARCHAR (50) NOT NULL,
-    [DateCreation]        DATETIME     NOT NULL,
-    [DateConclusion]      DATETIME     NULL,
-    [PercentageConcluded] FLOAT (53)   NOT NULL,
-    PRIMARY KEY CLUSTERED ([Id] ASC)
-);
-
-IF EXISTS (SELECT TOP 1 1 
-           FROM   [dbo].[TodoTask])
-    BEGIN
-        SET IDENTITY_INSERT [dbo].[tmp_ms_xx_TodoTask] ON;
-        INSERT INTO [dbo].[tmp_ms_xx_TodoTask] ([Id], [Priority], [Title], [DateCreation], [DateConclusion], [PercentageConcluded])
-        SELECT   [Id],
-                 [Priority],
-                 [Title],
-                 [DateCreation],
-                 [DateConclusion],
-                 [PercentageConcluded]
-        FROM     [dbo].[TodoTask]
-        ORDER BY [Id] ASC;
-        SET IDENTITY_INSERT [dbo].[tmp_ms_xx_TodoTask] OFF;
-    END
-
-DROP TABLE [dbo].[TodoTask];
-
-EXECUTE sp_rename N'[dbo].[tmp_ms_xx_TodoTask]', N'TodoTask';
-
-COMMIT TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-
-
-GO
 PRINT N'Update complete.';
 
 

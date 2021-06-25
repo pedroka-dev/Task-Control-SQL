@@ -10,6 +10,7 @@ namespace TaskControlSql.ConsoleApp.Control
 
     public abstract class Controller<T> where T : Entity
     {
+        protected abstract T ConvertToEntity(IDataReader reader);
         protected abstract SqlCommand SqlInsertCommand(T entity,SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlUpdateCommand(T entity, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase);
@@ -44,16 +45,8 @@ namespace TaskControlSql.ConsoleApp.Control
             SqlConnection conectionDatabase = ConnectToDatabase();
             SqlCommand commandExistEntity = SqlExistEntityCommand(index,conectionDatabase);
 
-            bool result;
-            try
-            {
                 int numberRows = Convert.ToInt32(commandExistEntity.ExecuteScalar());
-                result = numberRows > 0;
-            }
-            catch (Exception e)
-            {
-                result = false;
-            }
+                bool result = numberRows > 0;
 
             conectionDatabase.Close();
             return result;
@@ -67,7 +60,8 @@ namespace TaskControlSql.ConsoleApp.Control
             T entity;
             try
             {
-                entity = (T)commandReceiveEntity.ExecuteScalar();
+                SqlDataReader reader = commandReceiveEntity.ExecuteReader();
+                entity = ConvertToEntity(reader);
             }
             catch (Exception e)
             {
@@ -81,17 +75,17 @@ namespace TaskControlSql.ConsoleApp.Control
         public List<T> ReceiveAllEntities()
         {
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandReceiveEntity = SqlSelectAllCommand( conectionDatabase);
+            SqlCommand commandReceiveAllEntities = SqlSelectAllCommand( conectionDatabase);
 
-            List<T> entities;
-            try
-            {
-                entities = (List<T>)commandReceiveEntity.ExecuteScalar();
-            }
-            catch (Exception e)
-            {
-                entities = null;
-            }
+            List<T> entities = new List<T>();
+            
+                SqlDataReader reader = commandReceiveAllEntities.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    T entity = ConvertToEntity(reader);
+                    entities.Add(entity);
+                }
 
             conectionDatabase.Close();
             return entities;
@@ -105,7 +99,7 @@ namespace TaskControlSql.ConsoleApp.Control
             string operationMessage;
             try
             {
-                commandUpdate.ExecuteScalar();
+                commandUpdate.ExecuteNonQuery();
                 operationMessage = "OP_SUCCESS";
             }
             catch (Exception e)
@@ -123,18 +117,12 @@ namespace TaskControlSql.ConsoleApp.Control
             SqlCommand commandDeleteEntity = SqlDeleteEntityCommand(index, conectionDatabase);
 
             bool result;
-            try
-            {
-                object task = commandDeleteEntity.ExecuteScalar();
-                if (task != null)
-                    result = true;
-                else
-                    result = false;
-            }
-            catch (Exception e)
-            {
+
+            object task = commandDeleteEntity.ExecuteNonQuery();
+            if (task != null)
+                result = true;
+            else
                 result = false;
-            }
 
             conectionDatabase.Close();
             return result;
@@ -148,7 +136,7 @@ namespace TaskControlSql.ConsoleApp.Control
             string operationMessage;
             try
             {
-                commandDeleteAll.ExecuteScalar();
+                commandDeleteAll.ExecuteNonQuery();
                 operationMessage = "OP_SUCCESS";
             }
             catch (Exception e)

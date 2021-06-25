@@ -23,7 +23,17 @@ namespace TaskControlSql.ConsoleApp.View
             Console.WriteLine(" - Enter the title of the task:");
             string title = Console.ReadLine();
 
-            TodoTask todoTask = new TodoTask(0, priority, title, DateTime.Now);
+            TodoTask todoTask;
+
+            try
+            {
+                todoTask = new TodoTask(0, priority, title, DateTime.Now);
+            }
+            catch (Exception e)
+            {
+                DisplayErrorText("Error: " + e.Message);
+                return;
+            }
             string response = mainController.CreateEntity(todoTask);
 
             if (response != "OP_SUCCESS")
@@ -60,7 +70,16 @@ namespace TaskControlSql.ConsoleApp.View
             Console.WriteLine(" - Enter the title of the task:");
             string title = Console.ReadLine();
 
-            TodoTask todoTask = new TodoTask(id, priority, title, DateTime.MinValue);
+            TodoTask todoTask;
+            try
+            {
+                todoTask = new TodoTask(id, priority, title, DateTime.MinValue);
+            }
+            catch (Exception e)
+            {
+                DisplayErrorText("Error: " + e.Message);
+                return;
+            }
 
             Console.WriteLine(" - Enter the percentage concluded of the task (100 to complete):");
             string percentageConcludedTxt = Console.ReadLine();

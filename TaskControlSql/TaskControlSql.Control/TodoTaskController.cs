@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using TaskControlSql.ConsoleApp.Domain;
 
@@ -6,7 +7,21 @@ namespace TaskControlSql.ConsoleApp.Control
 {
     public class TodoTaskController : Controller<TodoTask>
     {
-        protected override SqlCommand SqlInsertCommand(TodoTask entity, SqlConnection conectionDatabase)
+		protected override TodoTask ConvertToEntity(IDataReader reader)
+		{
+			int id = Convert.ToInt32(reader["Id"]);
+			string Priority = Convert.ToString(reader["Priority"]);
+			string Title = Convert.ToString(reader["Title"]);
+			DateTime dateCreation = Convert.ToDateTime(reader["DateCreation"]);
+			TodoTask task = new TodoTask(id, Priority, Title, dateCreation);
+			
+			float percentual = (float)Convert.ToDouble(reader["PercentageConcluded"]);
+			task.UpdatePercentageConcluded(percentual);
+
+			return task;
+		}
+
+		protected override SqlCommand SqlInsertCommand(TodoTask entity, SqlConnection conectionDatabase)
 		{
 			SqlCommand command = new SqlCommand();
 			command.Connection = conectionDatabase;
@@ -82,11 +97,9 @@ namespace TaskControlSql.ConsoleApp.Control
 		            [DateConclusion],
 		            [PercentageConcluded]
 	            FROM 
-					[TodoTask] T
+					[TodoTask]
 				ORDER BY
-					T.Priority DESC";
-
-			sqlCommand += @"SELECT SCOPE_IDENTITY();";
+					Priority DESC";
 
 			command.CommandText = sqlCommand;
 
@@ -103,7 +116,7 @@ namespace TaskControlSql.ConsoleApp.Control
 	            FROM 
 					[TodoTask]
 				WHERE
-					[Id] = @Id";
+					[Id] = @Id;";
 
 			command.CommandText = sqlCommand;
 
@@ -148,8 +161,6 @@ namespace TaskControlSql.ConsoleApp.Control
 
 			string sqlCommand = @"DELETE FROM [TodoTask] WHERE [Id] = @Id";
 
-			sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
 			command.CommandText = sqlCommand;
 
 			command.Parameters.AddWithValue("Id", id);
@@ -168,6 +179,5 @@ namespace TaskControlSql.ConsoleApp.Control
 			return command;
 
 		}
-
     }
 }
