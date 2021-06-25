@@ -29,3 +29,5 @@ TaskControlSql/TaskControlSql.UnitTest/obj/Debug/TaskControlSql.UnitTest.csprojA
 TaskControlSql/TaskControlSql.Domain/obj/Debug/.NETFramework,Version=v4.7.2.AssemblyAttributes.cs
 TaskControlSql/.vs/TaskControlSql/v16/TestStore/0/000.testlog
 TaskControlSql/.vs/TaskControlSql/v16/TestStore/0/testlog.manifest
+TaskControlSql/TaskControlSql.UnitTest/obj/Debug/TaskControlSql.UnitTest.pdb
+TaskControlSql/TaskControlSql.UnitTest/obj/Debug/TaskControlSql.UnitTest.dll

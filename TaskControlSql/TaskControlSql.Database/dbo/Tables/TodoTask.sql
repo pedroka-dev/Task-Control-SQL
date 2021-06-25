@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[TodoTask] (
-    [Id]                  INT          NOT NULL,
+    [Id]                  INT          IDENTITY (1, 1) NOT NULL,
     [Priority]            VARCHAR (50) NOT NULL,
     [Title]               VARCHAR (50) NOT NULL,
     [DateCreation]        DATETIME     NOT NULL,

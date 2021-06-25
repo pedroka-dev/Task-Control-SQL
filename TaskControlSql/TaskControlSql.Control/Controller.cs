@@ -1,31 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using TaskControlSql.ConsoleApp.Domain;
 
 namespace TaskControlSql.ConsoleApp.Control
 {
+    public delegate T ConverterDelegate<T>(IDataReader reader);
+
     public abstract class Controller<T> where T : Entity
     {
-        protected int lastRegisteredId = 0;
         protected abstract SqlCommand SqlInsertCommand(T entity,SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlUpdateCommand(T entity, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlExistEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase);
         
 
         public string CreateEntity(T entity)
         {
-            entity.Id = this.GenerateId();
             SqlConnection conectionDatabase = ConnectToDatabase();
             SqlCommand commandInsertEntity = SqlInsertCommand(entity, conectionDatabase);
 
             string operationMessage;
             try
             {
-                commandInsertEntity.ExecuteScalar();
+                entity.Id = Convert.ToInt32(commandInsertEntity.ExecuteScalar());
                 operationMessage = "OP_SUCCESS";
             }
             catch (Exception e)
@@ -40,16 +42,13 @@ namespace TaskControlSql.ConsoleApp.Control
         public bool ExistEntity(int index)
         {
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandExistEntity = SqlSelectEntityCommand(index,conectionDatabase);
+            SqlCommand commandExistEntity = SqlExistEntityCommand(index,conectionDatabase);
 
             bool result;
             try
             {
-                object task = commandExistEntity.ExecuteScalar();
-                if(task != null)
-                    result = true;
-                else
-                    result = false;
+                int numberRows = Convert.ToInt32(commandExistEntity.ExecuteScalar());
+                result = numberRows > 0;
             }
             catch (Exception e)
             {
@@ -100,7 +99,6 @@ namespace TaskControlSql.ConsoleApp.Control
 
         public string UpdateEntity(T entity)
         {
-            entity.Id = this.GenerateId();
             SqlConnection conectionDatabase = ConnectToDatabase();
             SqlCommand commandUpdate = SqlUpdateCommand(entity, conectionDatabase);
 
@@ -160,11 +158,6 @@ namespace TaskControlSql.ConsoleApp.Control
 
             conectionDatabase.Close();
             return operationMessage;
-        }
-
-        protected int GenerateId()
-        {
-            return ++lastRegisteredId;
         }
 
         protected static SqlConnection ConnectToDatabase()
