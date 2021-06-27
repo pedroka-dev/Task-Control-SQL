@@ -6,6 +6,7 @@ namespace TaskControlSql.ConsoleApp.View
     public class MainMenu : Menu
     {
         TodoTaskController taskController;
+        ContactController contactController;
 
         public MainMenu(ConsoleColor fontColor)
         {
@@ -31,6 +32,9 @@ namespace TaskControlSql.ConsoleApp.View
 
                     case "1":
                         menu = new TodoTaskMenu(taskController, fontColor);
+                        break;
+                    case "2":
+                        menu = new ContactMenu(contactController, fontColor);
                         break;
 
                     default:

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskControlSql.ConsoleApp.Domain;
 
-namespace TaskControlSql.Domain
+namespace TaskControlSql.ConsoleApp.Domain
 {
-    class Contact : Entity
+    public class Contact : Entity
     {
         private string name;
         private string email;

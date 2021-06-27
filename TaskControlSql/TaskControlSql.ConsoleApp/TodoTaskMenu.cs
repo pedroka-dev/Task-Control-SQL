@@ -14,7 +14,7 @@ namespace TaskControlSql.ConsoleApp.View
             MenuTypeTitle = "task";
             this.fontColor = fontColor;
         }
-
+        
         public override void RegisterElement()
         {
             DisplayerHeader("REGISTER TASK");
@@ -52,7 +52,7 @@ namespace TaskControlSql.ConsoleApp.View
         {
             DisplayerHeader("REGISTER TASK");
 
-            Console.WriteLine(" - Enter id of the friend to Modify.");
+            Console.WriteLine(" - Enter id of the task to Modify.");
             string idTxt = Console.ReadLine();
 
             if (!int.TryParse(idTxt, out int id))
