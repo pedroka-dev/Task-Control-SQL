@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TaskControlSql.ConsoleApp.Control;
 using TaskControlSql.ConsoleApp.Domain;
 
@@ -17,7 +19,7 @@ namespace TaskControlSql.ConsoleApp.View
         {
             DisplayerHeader("REGISTER TASK");
 
-            Console.WriteLine(" - Enter the priority of the task:");
+            Console.WriteLine(" - Enter the priority of the task (HIGH, MEDIUM or LOW):");
             string priority = Console.ReadLine();
 
             Console.WriteLine(" - Enter the title of the task:");
@@ -64,7 +66,7 @@ namespace TaskControlSql.ConsoleApp.View
                 return;
             }
 
-            Console.WriteLine(" - Enter the priority of the task:");
+            Console.WriteLine(" - Enter the priority of the task (HIGH, MEDIUM or LOW):");
             string priority = Console.ReadLine();
 
             Console.WriteLine(" - Enter the title of the task:");
@@ -104,6 +106,11 @@ namespace TaskControlSql.ConsoleApp.View
                 Console.ReadLine();
                 return;
             }
+        }
+
+        protected override List<TodoTask> OrderList(List<TodoTask> EntityList)
+        {
+            return EntityList.OrderBy(x => x.Priority == "LOW").ThenBy(x => x.Priority == "MEDIUM").ThenBy(x => x.Priority == "HIGH").ToList();
         }
     }
 }

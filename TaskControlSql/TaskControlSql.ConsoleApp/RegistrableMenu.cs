@@ -10,6 +10,8 @@ namespace TaskControlSql.ConsoleApp.View
         protected string MenuTypeTitle;
         protected Controller<T> mainController;
 
+        protected abstract List<T> OrderList(List<T> EntityList);
+
         public abstract void ModifyElement();
 
         public abstract void RegisterElement();
@@ -103,7 +105,8 @@ namespace TaskControlSql.ConsoleApp.View
 
         public void VisualizeAllElements()
         {
-            List<T> entities = mainController.ReceiveAllEntities();
+            List<T> entities = OrderList(mainController.ReceiveAllEntities());
+
             DisplayerHeader("REGISTERED " + MenuTypeTitle.ToUpper());
             if (entities != null)
             {

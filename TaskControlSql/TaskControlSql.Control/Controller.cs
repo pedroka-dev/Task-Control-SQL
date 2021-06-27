@@ -75,7 +75,7 @@ namespace TaskControlSql.ConsoleApp.Control
         public List<T> ReceiveAllEntities()
         {
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandReceiveAllEntities = SqlSelectAllCommand( conectionDatabase);
+            SqlCommand commandReceiveAllEntities = SqlSelectAllCommand(conectionDatabase);
 
             List<T> entities = new List<T>();
             

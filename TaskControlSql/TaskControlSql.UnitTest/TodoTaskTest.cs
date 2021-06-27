@@ -12,7 +12,7 @@ namespace TaskControlSql.UnitTest
         {
             TodoTask todoTask;
             int correctId = 0;
-            string correctPriority = "High"; 
+            string correctPriority = "HIGH"; 
             string correctTitle = "Test Task"; 
             DateTime corectCreationTime  = DateTime.Now;
 
@@ -30,7 +30,7 @@ namespace TaskControlSql.UnitTest
             TodoTask todoTask;
             int percentage = 50;
             int correctId = 0;
-            string correctPriority = "High";
+            string correctPriority = "HIGH";
             string correctTitle = "Test Task";
             DateTime corectCreationTime = DateTime.Now;
 
@@ -47,7 +47,7 @@ namespace TaskControlSql.UnitTest
             TodoTask todoTask;
             int percentage = 101;
             int correctId = 0;
-            string correctPriority = "High";
+            string correctPriority = "HIGH";
             string correctTitle = "Test Task";
             DateTime corectCreationTime = DateTime.Now;
 
@@ -64,7 +64,7 @@ namespace TaskControlSql.UnitTest
         {
             TodoTask todoTask;
             int wrongId = -1;
-            string correctPriority = "High";
+            string correctPriority = "HIGH";
             string correctTitle = "Test Task";
             DateTime corectCreationTime = DateTime.Now;
 
@@ -77,7 +77,7 @@ namespace TaskControlSql.UnitTest
         {
             TodoTask todoTask;
             int correctId = -1;
-            string correctPriority = "High";
+            string correctPriority = "HIGH";
             string correctTitle = "Test Task";
             DateTime wrongCreationTime = DateTime.Now.AddDays(100);
 

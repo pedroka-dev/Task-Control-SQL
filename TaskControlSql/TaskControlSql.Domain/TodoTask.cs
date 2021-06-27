@@ -12,6 +12,7 @@ namespace TaskControlSql.ConsoleApp.Domain
 
         public TodoTask(int id, string priority, string title, DateTime creationTime)
         {
+            priority = priority.ToUpper();
             if (id < 0)
                 throw new ArgumentException("Attribute 'id' cannot be a number smaller than 0.");
             if (string.IsNullOrEmpty(priority))
@@ -20,6 +21,8 @@ namespace TaskControlSql.ConsoleApp.Domain
                 throw new ArgumentNullException("Attribute 'title' cannot be null or empty.");
             if (creationTime > DateTime.Now)
                 throw new ArgumentException("Attribute 'creationTime' cannot a date from the future.");
+            if(!priority.StartsWith("HIGH") && !priority.StartsWith("MEDIUM") && !priority.StartsWith("LOW"))
+                throw new ArgumentException("Attribute 'priority' cannot a string different from 'HIGH', 'MEDIUM' or 'LOW'.");
 
             this.id = id;
             this.priority = priority;
@@ -51,7 +54,7 @@ namespace TaskControlSql.ConsoleApp.Domain
 
         public override string ToString()
         {
-            return $"Todo Task {id} = [{priority},{title},{creationTime},{conclusionTime},{percentageConcluded}]";
+            return $"TodoTask [ id='{id}, priority='{priority}', title='{title}', creationTime='{creationTime}', conclusionTime='{conclusionTime}', percentageConcluded='{percentageConcluded}' ]";
         }
     }
 }

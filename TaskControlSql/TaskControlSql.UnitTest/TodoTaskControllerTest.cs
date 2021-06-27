@@ -8,6 +8,13 @@ namespace TaskControlSql.UnitTest
     [TestClass]
     public class TodoTaskControllerTest
     {
+        TodoTaskController taskController;
+        public TodoTaskControllerTest()
+        {
+            taskController = new TodoTaskController();
+            taskController.DeleteAllEntities();
+        }
+
         [TestMethod]
         public void Should_ReturnOpSucess_OnInsertNewTask()
         {
@@ -15,10 +22,8 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime corectCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
-
+            
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, corectCreationTime);
-            taskController.DeleteAllEntities();
             string response = taskController.CreateEntity(todoTask);
 
             string expectedResponse = "OP_SUCCESS";
@@ -32,8 +37,6 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime correctCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
-            taskController.DeleteAllEntities();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             todoTask.UpdatePercentageConcluded(50);
@@ -50,7 +53,6 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime correctCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
             taskController.DeleteAllEntities();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
@@ -68,7 +70,6 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime correctCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
             taskController.DeleteAllEntities();
 
             TodoTask todoTask1 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
@@ -94,8 +95,6 @@ namespace TaskControlSql.UnitTest
             string newCorrectPriority = "Medium";
             string newCorrectTitle = "Test Task Updated";
             DateTime newCorrectCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
-            taskController.DeleteAllEntities();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
@@ -117,8 +116,6 @@ namespace TaskControlSql.UnitTest
             string newCorrectPriority = "Medium";
             string newCorrectTitle = "Test Task Updated";
             DateTime newCorrectCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
-            taskController.DeleteAllEntities();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
@@ -141,8 +138,6 @@ namespace TaskControlSql.UnitTest
             string newCorrectPriority = "Medium";
             string newCorrectTitle = "Test Task Updated";
             DateTime newCorrectCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
-            taskController.DeleteAllEntities();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
@@ -161,10 +156,8 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime correctCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            taskController.DeleteAllEntities();
             bool response = taskController.ExistEntity(todoTask.Id);
 
             Assert.IsFalse(response);
@@ -177,10 +170,8 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime correctCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            taskController.DeleteAllEntities();
             taskController.CreateEntity(todoTask);
             bool response = taskController.ExistEntity(todoTask.Id);
 
@@ -194,12 +185,10 @@ namespace TaskControlSql.UnitTest
             string correctPriority = "High";
             string correctTitle = "Test Task";
             DateTime correctCreationTime = DateTime.Now;
-            TodoTaskController taskController = new TodoTaskController();
 
             TodoTask todoTask1 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             TodoTask todoTask2 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             TodoTask todoTask3 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            taskController.DeleteAllEntities();
             taskController.CreateEntity(todoTask1);
             taskController.CreateEntity(todoTask2);
             taskController.CreateEntity(todoTask3);
