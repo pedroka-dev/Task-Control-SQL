@@ -64,5 +64,6 @@
   <ItemGroup>
     <Build Include="dbo\Tables\TodoTask.sql" />
     <Build Include="dbo\Tables\Contact.sql" />
+    <Build Include="dbo\Tables\Appointment.sql" />
   </ItemGroup>
 </Project>

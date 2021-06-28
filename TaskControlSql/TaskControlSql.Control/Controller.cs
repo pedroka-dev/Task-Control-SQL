@@ -57,15 +57,12 @@ namespace TaskControlSql.ConsoleApp.Control
             SqlConnection conectionDatabase = ConnectToDatabase();
             SqlCommand commandReceiveEntity = SqlSelectEntityCommand(index, conectionDatabase);
 
-            T entity;
-            try
+            T entity = null;
+
+            SqlDataReader reader = commandReceiveEntity.ExecuteReader();
+            while (reader.Read())
             {
-                SqlDataReader reader = commandReceiveEntity.ExecuteReader();
                 entity = ConvertToEntity(reader);
-            }
-            catch (Exception e)
-            {
-                entity = null;
             }
 
             conectionDatabase.Close();
@@ -78,14 +75,14 @@ namespace TaskControlSql.ConsoleApp.Control
             SqlCommand commandReceiveAllEntities = SqlSelectAllCommand(conectionDatabase);
 
             List<T> entities = new List<T>();
-            
-                SqlDataReader reader = commandReceiveAllEntities.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    T entity = ConvertToEntity(reader);
-                    entities.Add(entity);
-                }
+            SqlDataReader reader = commandReceiveAllEntities.ExecuteReader();
+
+            while (reader.Read())
+            {
+                T entity = ConvertToEntity(reader);
+                entities.Add(entity);
+            }
 
             conectionDatabase.Close();
             return entities;

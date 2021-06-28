@@ -8,6 +8,7 @@ namespace TaskControlSql.ConsoleApp.Domain
 {
     public class Appointment : Entity
     {
+        private string contactName = " ";
         private Contact contact;
         private string meetingSubject;
         private bool isRemoteMeeting;
@@ -29,6 +30,9 @@ namespace TaskControlSql.ConsoleApp.Domain
             this.meetingDate = meetingDate;
             this.startTime = startTime;
             this.endTime = endTime;
+
+            if (contact != null)
+                contactName = contact.Name;
         }
 
         public Contact Contact { get => contact; }
@@ -41,7 +45,7 @@ namespace TaskControlSql.ConsoleApp.Domain
 
         public override string ToString()
         {
-            return $"Appointment [ id='{id}, contact = {contact.Name}, meetingSubject = {meetingSubject}, meetingPlace = {meetingPlace}, meetingDate = {meetingDate}, startTime = {startTime}, endTime = {endTime} ]";
+            return $"Appointment [ id='{id}, contact = {contactName}, meetingSubject = {meetingSubject}, meetingPlace = {meetingPlace}, meetingDate = {meetingDate}, startTime = {startTime}, endTime = {endTime} ]";
         }
     }
 }

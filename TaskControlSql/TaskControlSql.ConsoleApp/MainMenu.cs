@@ -14,7 +14,7 @@ namespace TaskControlSql.ConsoleApp.View
             this.fontColor = fontColor;
             taskController = new TodoTaskController();
             contactController = new ContactController();
-            appoitmentController = new AppoitmentController();
+            appoitmentController = new AppoitmentController(contactController);
         }
 
         public override void ShowMenu()

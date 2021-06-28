@@ -174,7 +174,6 @@ namespace TaskControlSql.ConsoleApp.Control
 
 			command.CommandText = sqlCommand;
 			return command;
-
 		}
     }
 }

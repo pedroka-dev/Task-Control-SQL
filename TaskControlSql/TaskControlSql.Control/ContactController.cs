@@ -88,6 +88,31 @@ namespace TaskControlSql.ConsoleApp.Control
             return command;
         }
 
+    //    protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
+    //    {
+    //        SqlCommand command = new SqlCommand();
+    //        command.Connection = conectionDatabase;
+
+    //        string sqlCommand = @"SELECT
+		  //          [Id],
+		  //          [Priority],
+		  //          [Title],
+		  //          [DateCreation],
+		  //          [DateConclusion],
+		  //          [PercentageConcluded]
+	   //         FROM 
+				//	[TodoTask]
+				//WHERE
+				//	[Id] = @Id";
+
+    //        sqlCommand += @"SELECT SCOPE_IDENTITY();";
+
+    //        command.CommandText = sqlCommand;
+
+    //        command.Parameters.AddWithValue("Id", id);
+    //        return command;
+    //    }
+
         protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand();
@@ -103,7 +128,7 @@ namespace TaskControlSql.ConsoleApp.Control
 	            FROM 
 					[Contact]
 				WHERE
-					[Id] = @Id";
+					[Id] = @Id ";
 
             sqlCommand += @"SELECT SCOPE_IDENTITY();";
 

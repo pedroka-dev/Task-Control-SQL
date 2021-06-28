@@ -64,29 +64,29 @@ namespace TaskControlSql.ConsoleApp.View
 
             Console.WriteLine(" - Enter the date of appoiment:");
             string meetingDateTxt = Console.ReadLine();
-            if (!DateTime.TryParse(meetingDateTxt, out DateTime meetingDate))
+            if (!meetingDateTxt.Contains("/") || !DateTime.TryParse(meetingDateTxt, out DateTime meetingDate))
             {
-                DisplayErrorText("Attribute meetingDate must a valid DateTime.");
+                DisplayErrorText("Attribute meetingDate must a valid DateTime date.");
                 return;
             }
 
             Console.WriteLine(" - Enter the starting time of the appoiment:");
             string startTimeTxt = Console.ReadLine();
-
-            if (!DateTime.TryParse(startTimeTxt, out DateTime startTime))
+            if (!startTimeTxt.Contains(":") ||  !DateTime.TryParse(startTimeTxt, out DateTime startTime))
             {
-                DisplayErrorText("Attribute meetingDate must a valid DateTime.");
+                DisplayErrorText("Attribute meetingDate must a valid DateTime hours and minutes.");
                 return;
             }
+            startTime = meetingDate.AddMinutes(startTime.Hour+startTime.Minute);
 
             Console.WriteLine(" - Enter the ending time of the appoiment:");
             string endTimeTxt = Console.ReadLine();
-
-            if (!DateTime.TryParse(endTimeTxt, out DateTime endTime))
+            if (!endTimeTxt.Contains(":") || !DateTime.TryParse(endTimeTxt, out DateTime endTime))
             {
-                DisplayErrorText("Attribute meetingDate must a valid DateTime.");
+                DisplayErrorText("Attribute meetingDate must a valid DateTime hours and minutes.");
                 return;
             }
+            endTime = meetingDate.AddMinutes(endTime.Hour + endTime.Minute);
 
             Appointment appointment;
 
@@ -220,7 +220,7 @@ namespace TaskControlSql.ConsoleApp.View
 
         protected override List<Appointment> OrderList(List<Appointment> EntityList)
         {
-            return EntityList.OrderBy(x => x.MeetingDate).ThenBy(x =>x.StartTime).ToList();
+            return EntityList.OrderBy(x => x.EndTime <= DateTime.Now).ToList();
         }
     }
 }
