@@ -47,10 +47,6 @@
     <Compile Include="TodoTaskController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskControlSql.Database\TaskControlSql.Database.sqlproj">
-      <Project>{cdf0a4bf-cbfc-4917-a6b3-090506a6bd7d}</Project>
-      <Name>TaskControlSql.Database</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TaskControlSql.Domain\TaskControlSql.Domain.csproj">
       <Project>{c37a131e-a6aa-4bbd-99b1-d30aa3dad5f1}</Project>
       <Name>TaskControlSql.Domain</Name>

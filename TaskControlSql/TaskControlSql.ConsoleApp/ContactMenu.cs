@@ -35,12 +35,12 @@ namespace TaskControlSql.ConsoleApp.View
             string businessCompany = Console.ReadLine();
 
             Console.WriteLine(" - Enter working position of the contact on the company:");
-            string positionCompany = Console.ReadLine();
+            string companyPosition = Console.ReadLine();
 
             Contact contact;
             try
             {
-                contact = new Contact(0, name, email, phoneNumber, businessCompany, positionCompany);
+                contact = new Contact(0, name, email, phoneNumber, businessCompany, companyPosition);
             }
             catch (Exception e)
             {
@@ -59,10 +59,10 @@ namespace TaskControlSql.ConsoleApp.View
             }
         }
 
-
         public override void ModifyElement()
         {
-            DisplayerHeader("REGISTER CONTACT");
+            VisualizeAllElements();
+            DisplayerHeader("MODIFY CONTACT");
 
             Console.WriteLine(" - Enter id of the friend to Modify.");
             string idTxt = Console.ReadLine();
@@ -91,18 +91,12 @@ namespace TaskControlSql.ConsoleApp.View
             string businessCompany = Console.ReadLine();
 
             Console.WriteLine(" - Enter working position of the contact on the company:");
-            string positionCompany = Console.ReadLine();
-
-            Console.WriteLine(" - Enter the priority of the task (HIGH, MEDIUM or LOW):");
-            string priority = Console.ReadLine();
-
-            Console.WriteLine(" - Enter the title of the task:");
-            string title = Console.ReadLine();
+            string companyPosition = Console.ReadLine();
 
             Contact contact;
             try
             {
-                contact = new Contact(0, name, email, phoneNumber, businessCompany, positionCompany);
+                contact = new Contact(id, name, email, phoneNumber, businessCompany, companyPosition);
             }
             catch (Exception e)
             {

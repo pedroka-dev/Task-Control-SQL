@@ -6,7 +6,7 @@
     <Name>TaskControlSql.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{cdf0a4bf-cbfc-4917-a6b3-090506a6bd7d}</ProjectGuid>
+    <ProjectGuid>{5b0c2e04-0ea5-4dbf-adcc-45d4f694ca4b}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>

@@ -12,6 +12,7 @@ namespace TaskControlSql.ConsoleApp.View
         {
             this.fontColor = fontColor;
             taskController = new TodoTaskController();
+            contactController = new ContactController();
         }
 
         public override void ShowMenu()
@@ -50,6 +51,7 @@ namespace TaskControlSql.ConsoleApp.View
         protected override string SelectOption()
         {
             Console.WriteLine(" - Enter 1 to manage Tasks.");
+            Console.WriteLine(" - Enter 2 to manage Contacts.");
             Console.WriteLine(" - Enter Q to quit.");
 
             string option = Console.ReadLine();

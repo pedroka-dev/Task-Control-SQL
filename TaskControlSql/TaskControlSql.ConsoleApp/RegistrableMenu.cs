@@ -88,6 +88,8 @@ namespace TaskControlSql.ConsoleApp.View
 
         private void RemoveAllElements()
         {
+            VisualizeAllElements();
+            DisplayerHeader("REMOVE ALL " + MenuTypeTitle.ToUpper());
             Console.WriteLine($" - Are you sure you want to delete all {MenuTypeTitle}? This cannot be undone. <Y = delete>");
 
             if (Console.ReadLine().ToUpper() == "Y") {

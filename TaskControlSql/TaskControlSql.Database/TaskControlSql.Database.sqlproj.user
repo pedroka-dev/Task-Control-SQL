@@ -3,7 +3,5 @@
   <PropertyGroup>
     <StartupScript>(Blank)</StartupScript>
     <StartAction>StartNone</StartAction>
-    <TargetConnectionString>Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</TargetConnectionString>
-    <TargetDatabase>DBTaskControl</TargetDatabase>
   </PropertyGroup>
 </Project>

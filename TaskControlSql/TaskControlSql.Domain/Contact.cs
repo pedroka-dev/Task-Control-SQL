@@ -14,7 +14,7 @@ namespace TaskControlSql.ConsoleApp.Domain
         private string businessCompany;
         private string companyPosition;
 
-        public Contact(int id, string name, string email, string phoneNumber, string businessCompany, string positionCompany)
+        public Contact(int id, string name, string email, string phoneNumber, string businessCompany, string companyPosition)
         {
             if (id < 0)
                 throw new ArgumentException("Attribute 'id' cannot be a number smaller than 0.");
@@ -28,7 +28,7 @@ namespace TaskControlSql.ConsoleApp.Domain
             this.email = email;
             this.phoneNumber = phoneNumber;
             this.businessCompany = businessCompany;
-            this.companyPosition = positionCompany;
+            this.companyPosition = companyPosition;
         }
 
         public string Name { get => name;}
@@ -39,7 +39,7 @@ namespace TaskControlSql.ConsoleApp.Domain
 
         public override string ToString()
         {
-            return $"TodoTask [ id='{id}, name='{name}', email='{email}', phoneNumber='{phoneNumber}', businessCompany='{businessCompany}', positionCompany='{companyPosition}' ]";
+            return $"Contact [ id='{id}, name='{name}', email='{email}', phoneNumber='{phoneNumber}', businessCompany='{businessCompany}', positionCompany='{companyPosition}' ]";
         }
     }
 }

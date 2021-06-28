@@ -50,7 +50,8 @@ namespace TaskControlSql.ConsoleApp.View
 
         public override void ModifyElement()
         {
-            DisplayerHeader("REGISTER TASK");
+            VisualizeAllElements();
+            DisplayerHeader("MODIFY TASK");
 
             Console.WriteLine(" - Enter id of the task to Modify.");
             string idTxt = Console.ReadLine();

@@ -1,0 +1,84 @@
+28/06/2021 12:39:27	This log contains information about the import schema operation into project 'TaskControlSql.Database' on computer 'PEDROSKA-PC' by user 'Pedroska'.
+28/06/2021 12:39:28	Import of database schema has started.
+28/06/2021 12:39:32	Gathering database credentials
+28/06/2021 12:39:32	Gathering database options
+28/06/2021 12:39:32	Gathering users
+28/06/2021 12:39:32	Gathering roles
+28/06/2021 12:39:32	Gathering application roles
+28/06/2021 12:39:32	Gathering role memberships
+28/06/2021 12:39:32	Gathering filegroups
+28/06/2021 12:39:32	Gathering full-text catalogs
+28/06/2021 12:39:32	Gathering assemblies
+28/06/2021 12:39:32	Gathering certificates
+28/06/2021 12:39:32	Gathering asymmetric keys
+28/06/2021 12:39:32	Gathering symmetric keys
+28/06/2021 12:39:32	Gathering encrypted symmetric keys
+28/06/2021 12:39:32	Gathering schemas
+28/06/2021 12:39:32	Gathering XML schema collections
+28/06/2021 12:39:32	Gathering user-defined data types
+28/06/2021 12:39:32	Gathering user-defined types
+28/06/2021 12:39:32	Gathering table types
+28/06/2021 12:39:32	Gathering unique keys for table types
+28/06/2021 12:39:32	Gathering primary keys for table types
+28/06/2021 12:39:32	Gathering indexes for table types
+28/06/2021 12:39:32	Gathering check constraints for table types
+28/06/2021 12:39:32	Gathering default constraints for table types
+28/06/2021 12:39:32	Gathering partition functions
+28/06/2021 12:39:32	Gathering partition schemes
+28/06/2021 12:39:32	Gathering functions
+28/06/2021 12:39:32	Gathering encrypted functions
+28/06/2021 12:39:32	Gathering aggregates
+28/06/2021 12:39:32	Gathering procedures
+28/06/2021 12:39:32	Gathering encrypted procedures
+28/06/2021 12:39:32	Gathering tables
+28/06/2021 12:39:32	Gathering primary keys
+28/06/2021 12:39:32	Gathering unique constraints
+28/06/2021 12:39:32	Gathering foreign keys
+28/06/2021 12:39:32	Gathering default constraints
+28/06/2021 12:39:32	Gathering check constraints
+28/06/2021 12:39:32	Gathering views
+28/06/2021 12:39:32	Gathering encrypted views
+28/06/2021 12:39:32	Gathering indexes
+28/06/2021 12:39:32	Gathering statistics
+28/06/2021 12:39:32	Gathering full-text index stoplists
+28/06/2021 12:39:32	Gathering search property lists
+28/06/2021 12:39:32	Gathering search properties
+28/06/2021 12:39:32	Gathering full-text indexes
+28/06/2021 12:39:32	Gathering column store indexes
+28/06/2021 12:39:32	Gathering spatial indexes
+28/06/2021 12:39:32	Gathering XML indexes
+28/06/2021 12:39:32	Gathering Selective XML indexes
+28/06/2021 12:39:32	Gathering encrypted triggers
+28/06/2021 12:39:32	Gathering triggers
+28/06/2021 12:39:32	Gathering encrypted and clr ddl triggers
+28/06/2021 12:39:32	Gathering ddl triggers
+28/06/2021 12:39:32	Gathering synonyms
+28/06/2021 12:39:32	Gathering defaults
+28/06/2021 12:39:32	Gathering data constraint uddt bindings
+28/06/2021 12:39:32	Gathering rules
+28/06/2021 12:39:32	Gathering data constraint uddt bindings
+28/06/2021 12:39:32	Gathering message types
+28/06/2021 12:39:32	Gathering queues
+28/06/2021 12:39:32	Gathering contracts
+28/06/2021 12:39:32	Gathering services
+28/06/2021 12:39:32	Gathering event notifications
+28/06/2021 12:39:32	Gathering remote service bindings
+28/06/2021 12:39:32	Gathering broker priorities
+28/06/2021 12:39:32	Gathering signatures
+28/06/2021 12:39:32	Gathering data compression options
+28/06/2021 12:39:32	Gathering sequence types
+28/06/2021 12:39:32	Gathering security policies
+28/06/2021 12:39:32	Gather column encryption keys
+28/06/2021 12:39:32	Gathering column master keys
+28/06/2021 12:39:32	Gathering external data sources
+28/06/2021 12:39:32	Gathering external file formats
+28/06/2021 12:39:32	Gathering external tables
+28/06/2021 12:39:32	Gathering extended properties
+28/06/2021 12:39:32	Gathering credentials
+28/06/2021 12:39:32	Gathering logins
+28/06/2021 12:39:32	Gathering server audits
+28/06/2021 12:39:33	Scanning project for duplicate elements
+28/06/2021 12:39:33	Finished duplicate element processing
+28/06/2021 12:39:33	Finished importing database.
+28/06/2021 12:39:33	A summary of the import was saved to the following location: C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.Database\Import Schema Logs\TaskControlSql.Datab_20210628033927.log
+28/06/2021 12:39:33	Click Finish to continue...
