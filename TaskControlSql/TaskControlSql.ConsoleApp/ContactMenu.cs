@@ -8,7 +8,7 @@ using TaskControlSql.ConsoleApp.Domain;
 
 namespace TaskControlSql.ConsoleApp.View
 {
-    class ContactMenu : RegistrableMenu<Contact>
+    class ContactMenu : RegistrationMenu<Contact>
     {
 
         public ContactMenu(ContactController contactController, ConsoleColor fontColor)
@@ -110,7 +110,7 @@ namespace TaskControlSql.ConsoleApp.View
                 DisplayErrorText(response);
             else
             {
-                DisplaySuccessText("Register Operation Sucessful");
+                DisplaySuccessText("Modify Operation Sucessful");
                 Console.ReadLine();
                 return;
             }

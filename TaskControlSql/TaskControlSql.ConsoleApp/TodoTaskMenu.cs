@@ -6,7 +6,7 @@ using TaskControlSql.ConsoleApp.Domain;
 
 namespace TaskControlSql.ConsoleApp.View
 {
-    public class TodoTaskMenu : RegistrableMenu<TodoTask>
+    public class TodoTaskMenu : RegistrationMenu<TodoTask>
     {
         public TodoTaskMenu(TodoTaskController taskController, ConsoleColor fontColor)
         {
@@ -17,7 +17,7 @@ namespace TaskControlSql.ConsoleApp.View
         
         public override void RegisterElement()
         {
-            DisplayerHeader("REGISTER TASK");
+            DisplayerHeader("REGISTER " + MenuTypeTitle.ToUpper());
 
             Console.WriteLine(" - Enter the priority of the task (HIGH, MEDIUM or LOW):");
             string priority = Console.ReadLine();
@@ -51,7 +51,7 @@ namespace TaskControlSql.ConsoleApp.View
         public override void ModifyElement()
         {
             VisualizeAllElements();
-            DisplayerHeader("MODIFY TASK");
+            DisplayerHeader("MODIFY " + MenuTypeTitle.ToUpper());
 
             Console.WriteLine(" - Enter id of the task to Modify.");
             string idTxt = Console.ReadLine();
@@ -103,7 +103,7 @@ namespace TaskControlSql.ConsoleApp.View
                 DisplayErrorText(response);
             else
             {
-                DisplaySuccessText("Register Operation Sucessful");
+                DisplaySuccessText("Modify Operation Sucessful");
                 Console.ReadLine();
                 return;
             }

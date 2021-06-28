@@ -58,12 +58,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppointmentMenu.cs" />
     <Compile Include="ContactMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Menu.cs" />
-    <Compile Include="RegistrableMenu.cs" />
+    <Compile Include="RegistrationMenu.cs" />
     <Compile Include="TodoTaskMenu.cs" />
   </ItemGroup>
   <ItemGroup>

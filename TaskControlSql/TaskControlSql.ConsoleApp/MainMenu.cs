@@ -7,12 +7,14 @@ namespace TaskControlSql.ConsoleApp.View
     {
         TodoTaskController taskController;
         ContactController contactController;
+        AppoitmentController appoitmentController;
 
         public MainMenu(ConsoleColor fontColor)
         {
             this.fontColor = fontColor;
             taskController = new TodoTaskController();
             contactController = new ContactController();
+            appoitmentController = new AppoitmentController();
         }
 
         public override void ShowMenu()
@@ -20,7 +22,7 @@ namespace TaskControlSql.ConsoleApp.View
             while (true)
             {
                 Console.Clear();
-                DisplayerHeader("TASK CONTROL");
+                DisplayerHeader("SCHEDULE CONTROL");
 
                 Menu menu;
 
@@ -37,6 +39,9 @@ namespace TaskControlSql.ConsoleApp.View
                     case "2":
                         menu = new ContactMenu(contactController, fontColor);
                         break;
+                    case "3":
+                        menu = new AppointmentMenu(appoitmentController,contactController, fontColor);
+                        break;
 
                     default:
                         DisplayErrorText("Invalid option. Use only the available options from above.");
@@ -52,6 +57,7 @@ namespace TaskControlSql.ConsoleApp.View
         {
             Console.WriteLine(" - Enter 1 to manage Tasks.");
             Console.WriteLine(" - Enter 2 to manage Contacts.");
+            Console.WriteLine(" - Enter 3 to manage Appointments.");
             Console.WriteLine(" - Enter Q to quit.");
 
             string option = Console.ReadLine();
