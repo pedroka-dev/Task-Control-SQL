@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Domain;
 
-namespace TaskControlSql.ConsoleApp.Control
+namespace TaskControlSql.Control
 {
     public class ContactController : Controller<Contact>
     {
@@ -87,31 +83,6 @@ namespace TaskControlSql.ConsoleApp.Control
 
             return command;
         }
-
-    //    protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
-    //    {
-    //        SqlCommand command = new SqlCommand();
-    //        command.Connection = conectionDatabase;
-
-    //        string sqlCommand = @"SELECT
-		  //          [Id],
-		  //          [Priority],
-		  //          [Title],
-		  //          [DateCreation],
-		  //          [DateConclusion],
-		  //          [PercentageConcluded]
-	   //         FROM 
-				//	[TodoTask]
-				//WHERE
-				//	[Id] = @Id";
-
-    //        sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-    //        command.CommandText = sqlCommand;
-
-    //        command.Parameters.AddWithValue("Id", id);
-    //        return command;
-    //    }
 
         protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
         {

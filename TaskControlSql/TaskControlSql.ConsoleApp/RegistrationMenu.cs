@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskControlSql.ConsoleApp.Control;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Control;
+using TaskControlSql.Domain;
 
-namespace TaskControlSql.ConsoleApp.View
+namespace TaskControlSql.ConsoleApp
 {
     public abstract class RegistrationMenu<T> : Menu where T : Entity
     {
@@ -92,7 +92,8 @@ namespace TaskControlSql.ConsoleApp.View
             DisplayerHeader("REMOVE ALL " + MenuTypeTitle.ToUpper());
             Console.WriteLine($" - Are you sure you want to delete all {MenuTypeTitle}? This cannot be undone. <Y = delete>");
 
-            if (Console.ReadLine().ToUpper() == "Y") {
+            if (Console.ReadLine().ToUpper() == "Y")
+            {
                 string response = mainController.DeleteAllEntities();
                 if (response != "OP_SUCCESS")
                     DisplayErrorText(response);

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TaskControlSql.ConsoleApp.Domain
+namespace TaskControlSql.Domain
 {
     public class Appointment : Entity
     {
@@ -36,12 +32,12 @@ namespace TaskControlSql.ConsoleApp.Domain
         }
 
         public Contact Contact { get => contact; }
-        public string MeetingSubject { get => meetingSubject;}
+        public string MeetingSubject { get => meetingSubject; }
         public bool IsRemoteMeeting { get => isRemoteMeeting; }
-        public string MeetingPlace { get => meetingPlace;}
-        public DateTime MeetingDate { get => meetingDate;}
-        public DateTime StartTime { get => startTime;}
-        public DateTime EndTime { get => endTime;}
+        public string MeetingPlace { get => meetingPlace; }
+        public DateTime MeetingDate { get => meetingDate; }
+        public DateTime StartTime { get => startTime; }
+        public DateTime EndTime { get => endTime; }
 
         public override string ToString()
         {

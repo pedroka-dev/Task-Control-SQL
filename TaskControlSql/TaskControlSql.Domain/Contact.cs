@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TaskControlSql.ConsoleApp.Domain
+namespace TaskControlSql.Domain
 {
     public class Contact : Entity
     {
@@ -31,10 +27,10 @@ namespace TaskControlSql.ConsoleApp.Domain
             this.companyPosition = companyPosition;
         }
 
-        public string Name { get => name;}
-        public string Email { get => email;}
-        public string PhoneNumber { get => phoneNumber;}
-        public string BusinessCompany { get => businessCompany;}
+        public string Name { get => name; }
+        public string Email { get => email; }
+        public string PhoneNumber { get => phoneNumber; }
+        public string BusinessCompany { get => businessCompany; }
         public string CompanyPosition { get => companyPosition; }
 
         public override string ToString()

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Domain;
 
 namespace TaskControlSql.UnitTest
 {
@@ -12,9 +12,9 @@ namespace TaskControlSql.UnitTest
         {
             TodoTask todoTask;
             int correctId = 0;
-            string correctPriority = "HIGH"; 
-            string correctTitle = "Test Task"; 
-            DateTime corectCreationTime  = DateTime.Now;
+            string correctPriority = "HIGH";
+            string correctTitle = "Test Task";
+            DateTime corectCreationTime = DateTime.Now;
 
             todoTask = new TodoTask(correctId, correctPriority, correctTitle, corectCreationTime);
 

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskControlSql.ConsoleApp.Control;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Control;
+using TaskControlSql.Domain;
 
-namespace TaskControlSql.ConsoleApp.View
+namespace TaskControlSql.ConsoleApp
 {
     class AppointmentMenu : RegistrationMenu<Appointment>
     {
@@ -22,7 +20,7 @@ namespace TaskControlSql.ConsoleApp.View
 
         public override void RegisterElement()
         {
-            DisplayerHeader("REGISTER "+ MenuTypeTitle.ToUpper());
+            DisplayerHeader("REGISTER " + MenuTypeTitle.ToUpper());
 
             Console.WriteLine(" - Enter id of the appoitment's contact <0 for null>");
             string idContactTxt = Console.ReadLine();
@@ -39,7 +37,7 @@ namespace TaskControlSql.ConsoleApp.View
             }
 
             Contact contact = null;
-            if(idContact != 0)
+            if (idContact != 0)
                 contact = contactController.ReceiveEntity(idContact);
 
             Console.WriteLine(" - Enter the subject of appoiment's meeting:");
@@ -72,12 +70,12 @@ namespace TaskControlSql.ConsoleApp.View
 
             Console.WriteLine(" - Enter the starting time of the appoiment:");
             string startTimeTxt = Console.ReadLine();
-            if (!startTimeTxt.Contains(":") ||  !DateTime.TryParse(startTimeTxt, out DateTime startTime))
+            if (!startTimeTxt.Contains(":") || !DateTime.TryParse(startTimeTxt, out DateTime startTime))
             {
                 DisplayErrorText("Attribute meetingDate must a valid DateTime hours and minutes.");
                 return;
             }
-            startTime = meetingDate.AddMinutes(startTime.Hour+startTime.Minute);
+            startTime = meetingDate.AddMinutes(startTime.Hour + startTime.Minute);
 
             Console.WriteLine(" - Enter the ending time of the appoiment:");
             string endTimeTxt = Console.ReadLine();

@@ -1,7 +1,7 @@
 ﻿using System;
-using TaskControlSql.ConsoleApp.Control;
+using TaskControlSql.Control;
 
-namespace TaskControlSql.ConsoleApp.View
+namespace TaskControlSql.ConsoleApp
 {
     public class MainMenu : Menu
     {
@@ -40,7 +40,7 @@ namespace TaskControlSql.ConsoleApp.View
                         menu = new ContactMenu(contactController, fontColor);
                         break;
                     case "3":
-                        menu = new AppointmentMenu(appoitmentController,contactController, fontColor);
+                        menu = new AppointmentMenu(appoitmentController, contactController, fontColor);
                         break;
 
                     default:

@@ -1,5 +1,5 @@
 ﻿
-namespace TaskControlSql.ConsoleApp.Domain
+namespace TaskControlSql.Domain
 {
     public abstract class Entity
     {

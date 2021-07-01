@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaskControlSql.ConsoleApp.Control;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Control;
+using TaskControlSql.Domain;
 
-namespace TaskControlSql.ConsoleApp.View
+namespace TaskControlSql.ConsoleApp
 {
     class ContactMenu : RegistrationMenu<Contact>
     {
@@ -115,7 +113,7 @@ namespace TaskControlSql.ConsoleApp.View
                 return;
             }
         }
-        
+
         protected override List<Contact> OrderList(List<Contact> EntityList)
         {
             return EntityList.OrderBy(x => x.CompanyPosition).ToList();

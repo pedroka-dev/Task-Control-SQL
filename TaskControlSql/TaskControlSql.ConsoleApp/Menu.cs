@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaskControlSql.ConsoleApp.View
+namespace TaskControlSql.ConsoleApp
 {
     public abstract class Menu
     {

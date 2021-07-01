@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Domain;
 
-namespace TaskControlSql.ConsoleApp.Control
+namespace TaskControlSql.Control
 {
     public delegate T ConverterDelegate<T>(IDataReader reader);
 
     public abstract class Controller<T> where T : Entity
     {
         protected abstract T ConvertToEntity(IDataReader reader);
-        protected abstract SqlCommand SqlInsertCommand(T entity,SqlConnection conectionDatabase);
+        protected abstract SqlCommand SqlInsertCommand(T entity, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlUpdateCommand(T entity, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlExistEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase);
         protected abstract SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase);
-        
+
 
         public string CreateEntity(T entity)
         {
@@ -43,10 +43,10 @@ namespace TaskControlSql.ConsoleApp.Control
         public bool ExistEntity(int index)
         {
             SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandExistEntity = SqlExistEntityCommand(index,conectionDatabase);
+            SqlCommand commandExistEntity = SqlExistEntityCommand(index, conectionDatabase);
 
-                int numberRows = Convert.ToInt32(commandExistEntity.ExecuteScalar());
-                bool result = numberRows > 0;
+            int numberRows = Convert.ToInt32(commandExistEntity.ExecuteScalar());
+            bool result = numberRows > 0;
 
             conectionDatabase.Close();
             return result;

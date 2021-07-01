@@ -1,5 +1,4 @@
 ﻿using System;
-using TaskControlSql.ConsoleApp.View;
 
 namespace TaskControlSql.ConsoleApp
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaskControlSql.ConsoleApp.Domain
+namespace TaskControlSql.Domain
 {
     public class TodoTask : Entity
     {
@@ -21,7 +21,7 @@ namespace TaskControlSql.ConsoleApp.Domain
                 throw new ArgumentNullException("Attribute 'title' cannot be null or empty.");
             if (creationTime > DateTime.Now)
                 throw new ArgumentException("Attribute 'creationTime' cannot a date from the future.");
-            if(!priority.StartsWith("HIGH") && !priority.StartsWith("MEDIUM") && !priority.StartsWith("LOW"))
+            if (!priority.StartsWith("HIGH") && !priority.StartsWith("MEDIUM") && !priority.StartsWith("LOW"))
                 throw new ArgumentException("Attribute 'priority' cannot a string different from 'HIGH', 'MEDIUM' or 'LOW'.");
 
             this.id = id;

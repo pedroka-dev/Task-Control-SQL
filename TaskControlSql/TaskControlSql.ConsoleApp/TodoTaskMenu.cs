@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TaskControlSql.ConsoleApp.Control;
-using TaskControlSql.ConsoleApp.Domain;
+using TaskControlSql.Control;
+using TaskControlSql.Domain;
 
-namespace TaskControlSql.ConsoleApp.View
+namespace TaskControlSql.ConsoleApp
 {
     public class TodoTaskMenu : RegistrationMenu<TodoTask>
     {
@@ -14,7 +14,7 @@ namespace TaskControlSql.ConsoleApp.View
             MenuTypeTitle = "task";
             this.fontColor = fontColor;
         }
-        
+
         public override void RegisterElement()
         {
             DisplayerHeader("REGISTER " + MenuTypeTitle.ToUpper());
