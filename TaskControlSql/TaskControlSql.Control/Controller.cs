@@ -147,8 +147,11 @@ namespace TaskControlSql.Control
 
         protected static SqlConnection ConnectToDatabase()
         {
-            SqlConnection connection = new SqlConnection();
-            connection.ConnectionString = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False"; ;
+            SqlConnection connection = new SqlConnection
+            {
+                ConnectionString = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False"
+            };
+            ;
             connection.Open();
             return connection;
         }

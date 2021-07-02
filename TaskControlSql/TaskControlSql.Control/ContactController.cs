@@ -22,8 +22,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlInsertCommand(Contact entity, SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"INSERT INTO [Contact]
 	            (
@@ -57,8 +59,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlUpdateCommand(Contact entity, SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"UPDATE [Contact] 
 				SET
@@ -86,8 +90,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"SELECT
 		            [Id],
@@ -111,8 +117,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"SELECT
 		            [Id],
@@ -131,8 +139,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlExistEntityCommand(int id, SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"SELECT
 		            COUNT(*) 
@@ -149,8 +159,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"DELETE FROM [Contact] WHERE [Id] = @Id";
 
@@ -162,8 +174,10 @@ namespace TaskControlSql.Control
 
         protected override SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase)
         {
-            SqlCommand command = new SqlCommand();
-            command.Connection = conectionDatabase;
+            SqlCommand command = new SqlCommand
+            {
+                Connection = conectionDatabase
+            };
 
             string sqlCommand = @"DELETE FROM Contact";
 

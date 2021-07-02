@@ -12,9 +12,75 @@ namespace TaskControlSql.ConsoleApp
 
         protected abstract List<T> OrderList(List<T> EntityList);
 
-        public abstract void ModifyElement();
+        protected abstract T UserInputToEntity(int id);
 
-        public abstract void RegisterElement();
+        public void RegisterElement()
+        {
+            DisplayerHeader("REGISTER " + MenuTypeTitle.ToUpper());
+
+            T entity;
+            try
+            {
+                entity = UserInputToEntity(0);
+            }
+            catch (Exception e)
+            {
+                DisplayErrorText("Error: " + e.Message);
+                return;
+            }
+
+            string response = mainController.CreateEntity(entity);
+
+            if (response != "OP_SUCCESS")
+                DisplayErrorText(response);
+            else
+            {
+                DisplaySuccessText("Register Operation Sucessful.");
+                Console.ReadLine();
+                return;
+            }
+        }
+
+        public void ModifyElement()
+        {
+            VisualizeAllElements();
+            DisplayerHeader("MODIFY " + MenuTypeTitle.ToUpper());
+
+            Console.WriteLine(" - Enter id of the " + MenuTypeTitle + " to Modify.");
+            string idTxt = Console.ReadLine();
+            if (!int.TryParse(idTxt, out int id))
+            {
+                DisplayErrorText("Attribute id must a valid integer.");
+                return;
+            }
+            if (!mainController.ExistEntity(id))
+            {
+                DisplayErrorText("Entity id does not exist.");
+                return;
+            }
+
+            T entity;
+            try
+            {
+                entity = UserInputToEntity(id);
+            }
+            catch (Exception e)
+            {
+                DisplayErrorText("Error: " + e.Message);
+                return;
+            }
+
+            string response = mainController.UpdateEntity(entity);
+
+            if (response != "OP_SUCCESS")
+                DisplayErrorText(response);
+            else
+            {
+                DisplaySuccessText("Modify Operation Sucessful");
+                Console.ReadLine();
+                return;
+            }
+        }
 
         public void RemoveElement()
         {
