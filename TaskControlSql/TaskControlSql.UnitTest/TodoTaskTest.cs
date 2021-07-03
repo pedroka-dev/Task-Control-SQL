@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TaskControlSql.Domain;
 
@@ -18,10 +19,10 @@ namespace TaskControlSql.UnitTest
 
             todoTask = new TodoTask(correctId, correctPriority, correctTitle, corectCreationTime);
 
-            Assert.AreEqual(correctId, todoTask.Id);
-            Assert.AreEqual(correctPriority, todoTask.Priority);
-            Assert.AreEqual(correctTitle, todoTask.Title);
-            Assert.AreEqual(corectCreationTime, todoTask.CreationTime);
+            todoTask.Id.Should().Be(correctId);
+            todoTask.Priority.Should().Be(correctPriority);
+            todoTask.Title.Should().Be(correctTitle);
+            todoTask.CreationTime.Should().Be(corectCreationTime);
         }
 
         [TestMethod]
@@ -35,10 +36,10 @@ namespace TaskControlSql.UnitTest
             DateTime corectCreationTime = DateTime.Now;
 
             todoTask = new TodoTask(correctId, correctPriority, correctTitle, corectCreationTime);
-            todoTask.UpdatePercentageConcluded(percentage);
+            todoTask.UpdatePercentageConcluded(percentage, DateTime.Now);
 
-            Assert.AreEqual(percentage, todoTask.PercentageConcluded);
-            Assert.AreEqual(null, todoTask.ConclusionTime);
+            todoTask.PercentageConcluded.Should().Be(percentage);
+            todoTask.ConclusionTime.Should().BeNull();
         }
 
         [TestMethod]
@@ -52,10 +53,10 @@ namespace TaskControlSql.UnitTest
             DateTime corectCreationTime = DateTime.Now;
 
             todoTask = new TodoTask(correctId, correctPriority, correctTitle, corectCreationTime);
-            todoTask.UpdatePercentageConcluded(percentage);
+            todoTask.UpdatePercentageConcluded(percentage, DateTime.Now);
 
-            Assert.AreEqual(100, todoTask.PercentageConcluded);
-            Assert.IsNotNull(todoTask.ConclusionTime);
+            todoTask.PercentageConcluded.Should().Be(100);
+            todoTask.ConclusionTime.Should().NotBeNull();
         }
 
         [TestMethod]

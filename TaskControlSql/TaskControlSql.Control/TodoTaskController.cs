@@ -13,10 +13,16 @@ namespace TaskControlSql.Control
             string Priority = Convert.ToString(reader["Priority"]);
             string Title = Convert.ToString(reader["Title"]);
             DateTime dateCreation = Convert.ToDateTime(reader["DateCreation"]);
+            object dateConclusionRaw = reader["DateConclusion"];
+            DateTime dateConclusion;
+            if (dateConclusionRaw == DBNull.Value)
+                dateConclusion = DateTime.MinValue;
+            else
+                dateConclusion = Convert.ToDateTime(dateConclusionRaw);
             TodoTask task = new TodoTask(Id, Priority, Title, dateCreation);
 
             float percentual = (float)Convert.ToDouble(reader["PercentageConcluded"]);
-            task.UpdatePercentageConcluded(percentual);
+            task.UpdatePercentageConcluded(percentual, dateConclusion);
 
             return task;
         }
@@ -184,7 +190,8 @@ namespace TaskControlSql.Control
                 Connection = conectionDatabase
             };
 
-            string sqlCommand = @"DELETE FROM TodoTask";
+            string sqlCommand = @"DELETE FROM TodoTask;";
+            sqlCommand += " DBCC CHECKIDENT('TodoTask', RESEED, 0)";
 
             command.CommandText = sqlCommand;
             return command;

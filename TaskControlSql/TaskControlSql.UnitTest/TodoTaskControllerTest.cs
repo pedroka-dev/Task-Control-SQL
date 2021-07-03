@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using TaskControlSql.Control;
 using TaskControlSql.Domain;
@@ -21,13 +22,13 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime corectCreationTime = DateTime.Now;
+            DateTime corectCreationTime = DateTime.Today;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, corectCreationTime);
             string response = taskController.CreateEntity(todoTask);
 
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response);
+            response.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(todoTask.Id).Should().Be(todoTask);
         }
 
         [TestMethod]
@@ -36,14 +37,14 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            todoTask.UpdatePercentageConcluded(50);
+            todoTask.UpdatePercentageConcluded(50, DateTime.Today);
             string response = taskController.CreateEntity(todoTask);
 
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response);
+            response.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(todoTask.Id).Should().Be(todoTask);
         }
 
         [TestMethod]
@@ -52,15 +53,14 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
-            taskController.DeleteAllEntities();
+            DateTime correctCreationTime = DateTime.Today;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            todoTask.UpdatePercentageConcluded(100);
+            todoTask.UpdatePercentageConcluded(100, DateTime.Today);
             string response = taskController.CreateEntity(todoTask);
 
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response);
+            response.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(todoTask.Id).Should().Be(todoTask);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
             taskController.DeleteAllEntities();
 
             TodoTask todoTask1 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
@@ -79,10 +79,12 @@ namespace TaskControlSql.UnitTest
             string response2 = taskController.CreateEntity(todoTask2);
             string response3 = taskController.CreateEntity(todoTask3);
 
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response1);
-            Assert.AreEqual(expectedResponse, response2);
-            Assert.AreEqual(expectedResponse, response3);
+            response1.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(todoTask1.Id).Should().Be(todoTask1);
+            response1.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(todoTask1.Id).Should().Be(todoTask1);
+            response1.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(todoTask1.Id).Should().Be(todoTask1);
         }
 
         [TestMethod]
@@ -91,19 +93,18 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
             string newCorrectPriority = "Medium";
             string newCorrectTitle = "Test Task Updated";
-            DateTime newCorrectCreationTime = DateTime.Now;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(0, newCorrectPriority, newCorrectTitle, correctCreationTime);
             taskController.CreateEntity(todoTask);
+            updatedTodoTask.Id = todoTask.Id;
             string response = taskController.UpdateEntity(updatedTodoTask);
 
-
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response);
+            response.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(updatedTodoTask.Id).Should().Be(updatedTodoTask); ;
         }
 
         [TestMethod]
@@ -112,20 +113,20 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
             string newCorrectPriority = "Medium";
             string newCorrectTitle = "Test Task Updated";
-            DateTime newCorrectCreationTime = DateTime.Now;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
-            updatedTodoTask.UpdatePercentageConcluded(50);
+            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, correctCreationTime);
+            updatedTodoTask.UpdatePercentageConcluded(50, DateTime.Now);
             taskController.CreateEntity(todoTask);
+            updatedTodoTask.Id = todoTask.Id;
             string response = taskController.UpdateEntity(updatedTodoTask);
 
 
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response);
+            response.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(updatedTodoTask.Id).Should().Be(updatedTodoTask); ;
         }
 
         [TestMethod]
@@ -134,19 +135,19 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
             string newCorrectPriority = "Medium";
             string newCorrectTitle = "Test Task Updated";
-            DateTime newCorrectCreationTime = DateTime.Now;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, newCorrectCreationTime);
-            updatedTodoTask.UpdatePercentageConcluded(100);
+            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, correctCreationTime);
+            updatedTodoTask.UpdatePercentageConcluded(100, DateTime.Today);
             taskController.CreateEntity(todoTask);
+            updatedTodoTask.Id = todoTask.Id;
             string response = taskController.UpdateEntity(updatedTodoTask);
 
-            string expectedResponse = "OP_SUCCESS";
-            Assert.AreEqual(expectedResponse, response);
+            response.Should().Be("OP_SUCCESS");
+            taskController.ReceiveEntity(updatedTodoTask.Id).Should().Be(updatedTodoTask); ;
         }
 
         [TestMethod]
@@ -155,12 +156,12 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             bool response = taskController.ExistEntity(todoTask.Id);
 
-            Assert.IsFalse(response);
+            response.Should().BeFalse();
         }
 
         [TestMethod]
@@ -169,13 +170,13 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             taskController.CreateEntity(todoTask);
             bool response = taskController.ExistEntity(todoTask.Id);
 
-            Assert.IsTrue(response);
+            response.Should().BeTrue();
         }
 
         [TestMethod]
@@ -184,7 +185,7 @@ namespace TaskControlSql.UnitTest
             int correctId = 0;
             string correctPriority = "High";
             string correctTitle = "Test Task";
-            DateTime correctCreationTime = DateTime.Now;
+            DateTime correctCreationTime = DateTime.Today;
 
             TodoTask todoTask1 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
             TodoTask todoTask2 = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
@@ -196,9 +197,9 @@ namespace TaskControlSql.UnitTest
             bool response2 = taskController.ExistEntity(todoTask2.Id);
             bool response3 = taskController.ExistEntity(todoTask3.Id);
 
-            Assert.IsTrue(response1);
-            Assert.IsTrue(response2);
-            Assert.IsTrue(response3);
+            response1.Should().BeTrue();
+            response2.Should().BeTrue();
+            response3.Should().BeTrue();
         }
     }
 }

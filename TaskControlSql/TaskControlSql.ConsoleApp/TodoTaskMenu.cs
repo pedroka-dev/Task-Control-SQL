@@ -15,7 +15,6 @@ namespace TaskControlSql.ConsoleApp
             this.fontColor = fontColor;
         }
 
-
         protected override TodoTask UserInputToEntity(int id)
         {
             Console.WriteLine(" - Enter the priority of the task (HIGH, MEDIUM or LOW):");
@@ -32,7 +31,7 @@ namespace TaskControlSql.ConsoleApp
             if (!float.TryParse(percentageConcludedTxt, out float percentageConcluded))
                 throw new ArgumentException("Attribute percentageConcluded must a valid positive float.");
             else
-                todoTask.UpdatePercentageConcluded(percentageConcluded);
+                todoTask.UpdatePercentageConcluded(percentageConcluded, DateTime.Now);
 
             return todoTask;
 

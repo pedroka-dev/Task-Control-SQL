@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TaskControlSql.Domain
 {
@@ -33,9 +34,32 @@ namespace TaskControlSql.Domain
         public string BusinessCompany { get => businessCompany; }
         public string CompanyPosition { get => companyPosition; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Contact contact &&
+                   id == contact.id &&
+                   name == contact.name &&
+                   email == contact.email &&
+                   phoneNumber == contact.phoneNumber &&
+                   businessCompany == contact.businessCompany &&
+                   companyPosition == contact.companyPosition;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 98067652;
+            hashCode = hashCode * -1521134295 + id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(email);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(phoneNumber);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(businessCompany);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(companyPosition);
+            return hashCode;
+        }
+
         public override string ToString()
         {
-            return $"Contact [ id='{id}, name='{name}', email='{email}', phoneNumber='{phoneNumber}', businessCompany='{businessCompany}', positionCompany='{companyPosition}' ]";
+            return $"Contact [ id='{id}', name='{name}', email='{email}', phoneNumber='{phoneNumber}', businessCompany='{businessCompany}', positionCompany='{companyPosition}' ]";
         }
     }
 }

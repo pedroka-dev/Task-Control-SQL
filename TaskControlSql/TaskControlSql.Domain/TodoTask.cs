@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TaskControlSql.Domain
 {
@@ -38,12 +39,12 @@ namespace TaskControlSql.Domain
         public DateTime? ConclusionTime { get => conclusionTime; }
         public float PercentageConcluded { get => percentageConcluded; }
 
-        public void UpdatePercentageConcluded(float percentage)
+        public void UpdatePercentageConcluded(float percentage, DateTime timeToConclude)
         {
             if (percentage >= 100)
             {
                 percentageConcluded = 100;
-                conclusionTime = DateTime.Now;
+                conclusionTime = timeToConclude;
             }
             else if (percentage >= 0)
             {
@@ -52,9 +53,33 @@ namespace TaskControlSql.Domain
             }
         }
 
+
+        public override bool Equals(object obj)
+        {
+            return obj is TodoTask task &&
+                   id == task.id &&
+                   priority == task.priority &&
+                   title == task.title &&
+                   creationTime == task.creationTime &&
+                   conclusionTime == task.conclusionTime &&
+                   percentageConcluded == task.percentageConcluded;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -2116570414;
+            hashCode = hashCode * -1521134295 + id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(priority);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(title);
+            hashCode = hashCode * -1521134295 + creationTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + conclusionTime.GetHashCode();
+            hashCode = hashCode * -1521134295 + percentageConcluded.GetHashCode();
+            return hashCode;
+        }
+
         public override string ToString()
         {
-            return $"TodoTask [ id='{id}, priority='{priority}', title='{title}', creationTime='{creationTime}', conclusionTime='{conclusionTime}', percentageConcluded='{percentageConcluded}' ]";
+            return $"TodoTask [ id='{id}', priority='{priority}', title='{title}', creationTime='{creationTime}', conclusionTime='{conclusionTime}', percentageConcluded='{percentageConcluded}' ]";
         }
     }
 }
