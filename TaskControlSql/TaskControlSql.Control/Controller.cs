@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using TaskControlSql.Domain;
 
@@ -10,20 +12,22 @@ namespace TaskControlSql.Control
 
     public abstract class Controller<T> where T : Entity
     {
+        public static readonly string databaseType = ConfigurationManager.AppSettings["databaseType"].ToLower();
+
         protected abstract T ConvertToEntity(IDataReader reader);
-        protected abstract SqlCommand SqlInsertCommand(T entity, SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlUpdateCommand(T entity, SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlExistEntityCommand(int id, SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase);
-        protected abstract SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase);
+        protected abstract DbCommand DBInsertCommand(T entity, DbConnection conectionDatabase);
+        protected abstract DbCommand DBUpdateCommand(T entity, DbConnection conectionDatabase);
+        protected abstract DbCommand DBSelectEntityCommand(int id, DbConnection conectionDatabase);
+        protected abstract DbCommand DBSelectAllCommand(DbConnection conectionDatabase);
+        protected abstract DbCommand DBExistEntityCommand(int id, DbConnection conectionDatabase);
+        protected abstract DbCommand DBDeleteEntityCommand(int id, DbConnection conectionDatabase);
+        protected abstract DbCommand DBDeleteAllCommand(DbConnection conectionDatabase);
 
 
         public string CreateEntity(T entity)
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandInsertEntity = SqlInsertCommand(entity, conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandInsertEntity = DBInsertCommand(entity, conectionDatabase);
 
             string operationMessage;
             try
@@ -42,8 +46,8 @@ namespace TaskControlSql.Control
 
         public bool ExistEntity(int index)
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandExistEntity = SqlExistEntityCommand(index, conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandExistEntity = DBExistEntityCommand(index, conectionDatabase);
 
             int numberRows = Convert.ToInt32(commandExistEntity.ExecuteScalar());
             bool result = numberRows > 0;
@@ -54,12 +58,12 @@ namespace TaskControlSql.Control
 
         public T ReceiveEntity(int index)
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandReceiveEntity = SqlSelectEntityCommand(index, conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandReceiveEntity = DBSelectEntityCommand(index, conectionDatabase);
 
             T entity = null;
 
-            SqlDataReader reader = commandReceiveEntity.ExecuteReader();
+            DbDataReader reader = commandReceiveEntity.ExecuteReader();
             while (reader.Read())
             {
                 entity = ConvertToEntity(reader);
@@ -71,12 +75,12 @@ namespace TaskControlSql.Control
 
         public List<T> ReceiveAllEntities()
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandReceiveAllEntities = SqlSelectAllCommand(conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandReceiveAllEntities = DBSelectAllCommand(conectionDatabase);
 
             List<T> entities = new List<T>();
 
-            SqlDataReader reader = commandReceiveAllEntities.ExecuteReader();
+            DbDataReader reader = commandReceiveAllEntities.ExecuteReader();
 
             while (reader.Read())
             {
@@ -90,8 +94,8 @@ namespace TaskControlSql.Control
 
         public string UpdateEntity(T entity)
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandUpdate = SqlUpdateCommand(entity, conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandUpdate = DBUpdateCommand(entity, conectionDatabase);
 
             string operationMessage;
             try
@@ -110,8 +114,8 @@ namespace TaskControlSql.Control
 
         public bool DeleteEntity(int index)
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandDeleteEntity = SqlDeleteEntityCommand(index, conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandDeleteEntity = DBDeleteEntityCommand(index, conectionDatabase);
 
             bool result;
 
@@ -127,8 +131,8 @@ namespace TaskControlSql.Control
 
         public string DeleteAllEntities()
         {
-            SqlConnection conectionDatabase = ConnectToDatabase();
-            SqlCommand commandDeleteAll = SqlDeleteAllCommand(conectionDatabase);
+            DbConnection conectionDatabase = ConnectToDatabase();
+            DbCommand commandDeleteAll = DBDeleteAllCommand(conectionDatabase);
 
             string operationMessage;
             try
@@ -145,13 +149,26 @@ namespace TaskControlSql.Control
             return operationMessage;
         }
 
-        protected static SqlConnection ConnectToDatabase()
+        protected static DbConnection ConnectToDatabase()
         {
-            SqlConnection connection = new SqlConnection
+            DbConnection connection = null;
+
+            if (databaseType.Equals("sql"))
             {
-                ConnectionString = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False"
-            };
-            ;
+                connection = new SqlConnection
+                {
+                    ConnectionString = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False"
+                };
+                ;
+            }
+            else if (databaseType.Equals("sqlite"))
+            {
+                //sql litle here
+            }
+            else
+            {
+                throw new Exception("Database type of "+databaseType+" not yet suported. Use only 'sql' or 'sqlite'");
+            }
             connection.Open();
             return connection;
         }

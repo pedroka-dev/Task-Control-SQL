@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using TaskControlSql.Domain;
 
@@ -20,11 +21,11 @@ namespace TaskControlSql.Control
             return contact;
         }
 
-        protected override SqlCommand SqlInsertCommand(Contact entity, SqlConnection conectionDatabase)
+        protected override DbCommand DBInsertCommand(Contact entity, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"INSERT INTO [Contact]
@@ -57,11 +58,11 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override SqlCommand SqlUpdateCommand(Contact entity, SqlConnection conectionDatabase)
+        protected override DbCommand DBUpdateCommand(Contact entity, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"UPDATE [Contact] 
@@ -88,11 +89,11 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override SqlCommand SqlSelectEntityCommand(int id, SqlConnection conectionDatabase)
+        protected override DbCommand DBSelectEntityCommand(int id, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"SELECT
@@ -115,11 +116,11 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override SqlCommand SqlSelectAllCommand(SqlConnection conectionDatabase)
+        protected override DbCommand DBSelectAllCommand(DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"SELECT
@@ -137,11 +138,11 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override SqlCommand SqlExistEntityCommand(int id, SqlConnection conectionDatabase)
+        protected override DbCommand DBExistEntityCommand(int id, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"SELECT
@@ -157,11 +158,11 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override SqlCommand SqlDeleteEntityCommand(int id, SqlConnection conectionDatabase)
+        protected override DbCommand DBDeleteEntityCommand(int id, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"DELETE FROM [Contact] WHERE [Id] = @Id";
@@ -172,11 +173,11 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override SqlCommand SqlDeleteAllCommand(SqlConnection conectionDatabase)
+        protected override DbCommand DBDeleteAllCommand(DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
-                Connection = conectionDatabase
+                Connection = (SqlConnection)conectionDatabase
             };
 
             string sqlCommand = @"DELETE FROM Contact";
