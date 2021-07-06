@@ -98,7 +98,7 @@ namespace TaskControlSql.UnitTest
             string newCorrectTitle = "Test Task Updated";
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            TodoTask updatedTodoTask = new TodoTask(0, newCorrectPriority, newCorrectTitle, correctCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(correctId, newCorrectPriority, newCorrectTitle, correctCreationTime);
             taskController.CreateEntity(todoTask);
             updatedTodoTask.Id = todoTask.Id;
             string response = taskController.UpdateEntity(updatedTodoTask);
@@ -118,7 +118,7 @@ namespace TaskControlSql.UnitTest
             string newCorrectTitle = "Test Task Updated";
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, correctCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(correctId, newCorrectPriority, newCorrectTitle, correctCreationTime);
             updatedTodoTask.UpdatePercentageConcluded(50, DateTime.Now);
             taskController.CreateEntity(todoTask);
             updatedTodoTask.Id = todoTask.Id;
@@ -140,7 +140,7 @@ namespace TaskControlSql.UnitTest
             string newCorrectTitle = "Test Task Updated";
 
             TodoTask todoTask = new TodoTask(correctId, correctPriority, correctTitle, correctCreationTime);
-            TodoTask updatedTodoTask = new TodoTask(1, newCorrectPriority, newCorrectTitle, correctCreationTime);
+            TodoTask updatedTodoTask = new TodoTask(correctId, newCorrectPriority, newCorrectTitle, correctCreationTime);
             updatedTodoTask.UpdatePercentageConcluded(100, DateTime.Today);
             taskController.CreateEntity(todoTask);
             updatedTodoTask.Id = todoTask.Id;
@@ -180,7 +180,7 @@ namespace TaskControlSql.UnitTest
         }
 
         [TestMethod]
-        public void Should_ReturnTrue_OnExistEntityWithMultipleTodoTask()
+        public void Should_ReturnTrue_OnExistEntityWithMultipleTodoTasks()
         {
             int correctId = 0;
             string correctPriority = "High";

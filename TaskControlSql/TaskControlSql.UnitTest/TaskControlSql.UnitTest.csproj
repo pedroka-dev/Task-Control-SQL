@@ -58,6 +58,8 @@
     <Compile Include="TodoTaskTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TodoTaskControllerTest.cs" />
+    <Compile Include="ContactControllerTest.cs" />
+    <Compile Include="ContactTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
