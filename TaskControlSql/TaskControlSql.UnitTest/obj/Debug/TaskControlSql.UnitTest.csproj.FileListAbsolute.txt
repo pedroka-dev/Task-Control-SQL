@@ -21,3 +21,9 @@ C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSq
 C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\FluentAssertions.xml
 C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\TaskControlSql.Control.dll.config
 C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\TaskControlSql.UnitTest.dll.config
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\System.Data.SQLite.dll
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\System.Data.SQLite.xml
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\EntityFramework.dll
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\EntityFramework.xml
+C:\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.UnitTest\bin\Debug\EntityFramework.SqlServer.xml

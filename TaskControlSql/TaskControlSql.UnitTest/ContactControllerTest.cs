@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using TaskControlSql.Control;
 using TaskControlSql.Domain;
 
@@ -118,7 +117,7 @@ namespace TaskControlSql.UnitTest
         [TestMethod]
         public void Should_ReturnTrue_OnExistEntityWithMultipleContacts()
         {
-  
+
             int correctId = 0;
             string correctName = "José";
             string correctEmail = "jose@jose.com.jose";

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Data.SQLite;
 using TaskControlSql.Domain;
 
 namespace TaskControlSql.Control
@@ -149,7 +150,7 @@ namespace TaskControlSql.Control
             return operationMessage;
         }
 
-        protected static DbConnection ConnectToDatabase()
+        protected static DbConnection ConnectToDatabase()       //colocar as ConnectionString no App.config
         {
             DbConnection connection = null;
 
@@ -163,11 +164,15 @@ namespace TaskControlSql.Control
             }
             else if (databaseType.Equals("sqlite"))
             {
-                //sql litle here
+                connection = new SQLiteConnection
+                {
+                    ConnectionString = @"Data Source=\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.Control\bin\Database\DBTaskControlSqLite.db"
+                };
+                ;
             }
             else
             {
-                throw new Exception("Database type of "+databaseType+" not yet suported. Use only 'sql' or 'sqlite'");
+                throw new Exception("Database type of " + databaseType + " not yet suported. Use only 'sql' or 'sqlite'");
             }
             connection.Open();
             return connection;

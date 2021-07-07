@@ -134,7 +134,7 @@ namespace TaskControlSql.Control
 	            FROM 
 					[Appointment]
 				WHERE
-					[Id] = @Id";
+					[Id] = @Id; ";
 
             sqlCommand += @"SELECT SCOPE_IDENTITY();";
 
