@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -22,248 +23,119 @@ namespace TaskControlSql.Control
             return contact;
         }
 
-        //remover duplicacao de codigo usando os parametros atraves do command.CreateParameter(); e command.Parameters.Add(parameter);
-        //DbCommand command;
-        //    if (databaseType == "sql")
-        //        command = new SqlCommand();
-        //    else
-        //        command = new SQLiteCommand();
-
-        protected override DbCommand DBInsertCommand(Contact entity, DbConnection conectionDatabase)
+        protected override List<DbParameter> ReceiveEntityParameters(Contact entity,DbCommand command)
         {
-            string sqlCommand = @"INSERT INTO [Contact]
-	            (
-		            [Name],
-		            [Email],
-		            [PhoneNumber],
-		            [BusinessCompany],
-		            [CompanyPosition]
-	            )
-	            VALUES
-	            (
-		            @Name,
-		            @Email,
-		            @PhoneNumber,
-		            @BusinessCompany,
-		            @CompanyPosition
-	             );";
+            List<DbParameter> parameters = new List<DbParameter>(); 
 
-            if (databaseType == "sql")
-            {
-                SqlCommand command = new SqlCommand();
-                command.Connection = (SqlConnection)conectionDatabase;
-                string selectScopeCommand = @"SELECT SCOPE_IDENTITY();";
+            DbParameter nameParam = command.CreateParameter();
+            nameParam.ParameterName = "Name";
+            nameParam.Value = entity.Name;
+            parameters.Add(nameParam);
 
-                command.CommandText = sqlCommand + selectScopeCommand;
+            DbParameter emailParam = command.CreateParameter();
+            emailParam.ParameterName = "Email";
+            emailParam.Value = entity.Email;
+            parameters.Add(emailParam);
 
-                command.Parameters.AddWithValue("Name", entity.Name);
-                command.Parameters.AddWithValue("Email", entity.Email);
-                command.Parameters.AddWithValue("PhoneNumber", entity.PhoneNumber);
-                command.Parameters.AddWithValue("BusinessCompany", entity.BusinessCompany);
-                command.Parameters.AddWithValue("CompanyPosition", entity.CompanyPosition);
-                return command;
-            }
-            else
-            {
-                SQLiteCommand command = new SQLiteCommand();
-                command.Connection = (SQLiteConnection)conectionDatabase;
-                string selectScopeCommand = @"SELECT last_insert_rowid();";
+            DbParameter phoneNumberParam = command.CreateParameter();
+            phoneNumberParam.ParameterName = "PhoneNumber";
+            phoneNumberParam.Value = entity.PhoneNumber;
+            parameters.Add(phoneNumberParam);
 
-                command.CommandText = sqlCommand + selectScopeCommand;
+            DbParameter businessCompanyParam = command.CreateParameter();
+            businessCompanyParam.ParameterName = "BusinessCompany";
+            businessCompanyParam.Value = entity.BusinessCompany;
+            parameters.Add(businessCompanyParam);
 
-                command.Parameters.AddWithValue("Name", entity.Name);
-                command.Parameters.AddWithValue("Email", entity.Email);
-                command.Parameters.AddWithValue("PhoneNumber", entity.PhoneNumber);
-                command.Parameters.AddWithValue("BusinessCompany", entity.BusinessCompany);
-                command.Parameters.AddWithValue("CompanyPosition", entity.CompanyPosition);
-                return command;
-            }
+            DbParameter companyPositionParam = command.CreateParameter();
+            companyPositionParam.ParameterName = "CompanyPosition";
+            companyPositionParam.Value = entity.CompanyPosition;
+            parameters.Add(companyPositionParam);
+
+            return parameters;
         }
 
-        protected override DbCommand DBUpdateCommand(Contact entity, DbConnection conectionDatabase)
+        protected override string SqlInsertCommand()
         {
-            string sqlCommand = @"UPDATE [Contact] 
-				SET
-		            [Name] = @Name,
-		            [Email] = @Email,
-		            [PhoneNumber] = @PhoneNumber,
-		            [BusinessCompany] = @BusinessCompany,
-		            [CompanyPosition] = @CompanyPosition
-
-				WHERE [Id] = @Id;";
-
-            if (databaseType == "sql")
-            {
-                SqlCommand command = new SqlCommand();
-                command.Connection = (SqlConnection)conectionDatabase;
-                string selectScopeCommand = @"SELECT SCOPE_IDENTITY();";
-
-                command.CommandText = sqlCommand + selectScopeCommand;
-
-                command.Parameters.AddWithValue("Id", entity.Id);
-                command.Parameters.AddWithValue("Name", entity.Name);
-                command.Parameters.AddWithValue("Email", entity.Email);
-                command.Parameters.AddWithValue("PhoneNumber", entity.PhoneNumber);
-                command.Parameters.AddWithValue("BusinessCompany", entity.BusinessCompany);
-                command.Parameters.AddWithValue("CompanyPosition", entity.CompanyPosition);
-                return command;
-            }
-            else
-            {
-                SQLiteCommand command = new SQLiteCommand();
-                command.Connection = (SQLiteConnection)conectionDatabase;
-                string selectScopeCommand = @"SELECT last_insert_rowid();";
-
-                command.CommandText = sqlCommand + selectScopeCommand;
-
-                command.Parameters.AddWithValue("Id", entity.Id);
-                command.Parameters.AddWithValue("Name", entity.Name);
-                command.Parameters.AddWithValue("Email", entity.Email);
-                command.Parameters.AddWithValue("PhoneNumber", entity.PhoneNumber);
-                command.Parameters.AddWithValue("BusinessCompany", entity.BusinessCompany);
-                command.Parameters.AddWithValue("CompanyPosition", entity.CompanyPosition);
-                return command;
-            }
+            return @"INSERT INTO 
+                        [Contact]
+	                (
+		                [Name],
+		                [Email],
+		                [PhoneNumber],
+		                [BusinessCompany],
+		                [CompanyPosition]
+	                )
+	                VALUES
+	                (
+		                @Name,
+		                @Email,
+		                @PhoneNumber,
+		                @BusinessCompany,
+		                @CompanyPosition
+	                );";
         }
 
-        protected override DbCommand DBSelectEntityCommand(int id, DbConnection conectionDatabase)
+        protected override string SqlUpdateCommand()
         {
-            string sqlCommand = @"SELECT 
-		            [Id],
-		            [Name],
-		            [Email],
-		            [PhoneNumber],
-		            [BusinessCompany],
-		            [CompanyPosition]
-	            FROM 
-					[Contact]
-				WHERE
-					[Id] = @Id; ";
+            return @"UPDATE 
+                        [Contact] 
+				    SET
+		                [Name] = @Name,
+		                [Email] = @Email,
+		                [PhoneNumber] = @PhoneNumber,
+		                [BusinessCompany] = @BusinessCompany,
+		                [CompanyPosition] = @CompanyPosition
 
-            if (databaseType == "sql")
-            {
-                SqlCommand command = new SqlCommand();
-                command.Connection = (SqlConnection)conectionDatabase;
-                string selectScopeCommand = @"SELECT SCOPE_IDENTITY();";
-
-                command.CommandText = sqlCommand + selectScopeCommand;
-
-                command.Parameters.AddWithValue("Id", id);
-                return command;
-            }
-            else
-            {
-                SQLiteCommand command = new SQLiteCommand();
-                command.Connection = (SQLiteConnection)conectionDatabase;
-                string selectScopeCommand = @"SELECT last_insert_rowid();";
-
-                command.CommandText = sqlCommand + selectScopeCommand;
-
-                command.Parameters.AddWithValue("Id", id);
-                return command;
-            }
+				    WHERE [Id] = @Id;";
         }
 
-        protected override DbCommand DBSelectAllCommand(DbConnection conectionDatabase)
+        protected override string SqlSelectEntityCommand()
         {
-            DbCommand command;
-
-            if (databaseType == "sql")
-                command = new SqlCommand();
-            else
-                command = new SQLiteCommand();
-
-            command.Connection = conectionDatabase;
-
-            string sqlCommand = @"SELECT
-		            [Id],
-		            [Name],
-		            [Email],
-		            [PhoneNumber],
-		            [BusinessCompany],
-		            [CompanyPosition]
-	            FROM 
-					[Contact]";
-
-
-            command.CommandText = sqlCommand;
-
-            return command;
+            return @"SELECT 
+		                [Id],
+		                [Name],
+		                [Email],
+		                [PhoneNumber],
+		                [BusinessCompany],
+		                [CompanyPosition]
+	                FROM 
+					    [Contact]
+				    WHERE
+					    [Id] = @Id; ";
         }
 
-        protected override DbCommand DBExistEntityCommand(int id, DbConnection conectionDatabase)
+        protected override string SqlSelectAllCommand()
         {
-            string sqlCommand = @"SELECT
-		            COUNT(*) 
-	            FROM 
-					[Contact]
-				WHERE
-					[Id] = @Id;";
-
-            if (databaseType == "sql")
-            {
-                SqlCommand command = new SqlCommand();
-                command.Connection = (SqlConnection)conectionDatabase;
-
-                command.CommandText = sqlCommand;
-
-                command.Parameters.AddWithValue("Id", id);
-                return command;
-            }
-            else
-            {
-                SQLiteCommand command = new SQLiteCommand();
-                command.Connection = (SQLiteConnection)conectionDatabase;
-
-                command.CommandText = sqlCommand;
-
-                command.Parameters.AddWithValue("Id", id);
-                return command;
-            }
+            return @"SELECT
+		                [Id],
+		                [Name],
+		                [Email],
+		                [PhoneNumber],
+		                [BusinessCompany],
+		                [CompanyPosition]
+	             FROM 
+					    [Contact]";
         }
 
-        protected override DbCommand DBDeleteEntityCommand(int id, DbConnection conectionDatabase)
+        protected override string SqlExistEntityCommand()
         {
-
-            string sqlCommand = @"DELETE FROM [Contact] WHERE [Id] = @Id";
-
-            if (databaseType == "sql")
-            {
-                SqlCommand command = new SqlCommand();
-                command.Connection = (SqlConnection)conectionDatabase;
-
-                command.CommandText = sqlCommand;
-
-                command.Parameters.AddWithValue("Id", id);
-                return command;
-            }
-            else
-            {
-                SQLiteCommand command = new SQLiteCommand();
-                command.Connection = (SQLiteConnection)conectionDatabase;
-
-                command.CommandText = sqlCommand;
-
-                command.Parameters.AddWithValue("Id", id);
-                return command;
-            }
+            return @"SELECT
+		                COUNT(*) 
+	                FROM 
+					    [Contact]
+				    WHERE
+					    [Id] = @Id;";
         }
 
-        protected override DbCommand DBDeleteAllCommand(DbConnection conectionDatabase)
+        protected override string SqlDeleteEntityCommand()
         {
-            DbCommand command;
+            return @"DELETE FROM [Contact] WHERE [Id] = @Id";
+        }
 
-            if (databaseType == "sql")
-                command = new SqlCommand();
-            else
-                command = new SQLiteCommand();
-
-            command.Connection = conectionDatabase;
-
-            string sqlCommand = @"DELETE FROM Contact";
-
-            command.CommandText = sqlCommand;
-            return command;
+        protected override string SqlDeleteAllCommand()
+        {
+            return @"DELETE FROM [Contact]";
         }
     }
 }
