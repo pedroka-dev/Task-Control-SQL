@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -32,14 +33,55 @@ namespace TaskControlSql.Control
             Appointment appointment = new Appointment(Id, Contact, MeetingSubject, IsRemoteMeeting, MeetingPlace, MeetingDate, StartTime, EndTime);
             return appointment;
         }
-        protected override DbCommand ExecuteDBInsert(Appointment entity, DbConnection conectionDatabase)
-        {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
 
-            string sqlCommand = @"INSERT INTO [Appointment]
+        protected override List<DbParameter> ReceiveEntityParameters(Appointment entity, DbCommand command)
+        {
+            List<DbParameter> parameters = new List<DbParameter>();
+
+            DbParameter idContactParam = command.CreateParameter();
+            object idContactValue = DBNull.Value;
+            if (entity.Contact != null)
+                idContactValue = entity.Contact.Id;
+            idContactParam.ParameterName = "Id_Contact";
+            idContactParam.Value = idContactValue;
+            parameters.Add(idContactParam);
+
+            DbParameter meetingSubjectParam = command.CreateParameter();
+            meetingSubjectParam.ParameterName = "MeetingSubject";
+            meetingSubjectParam.Value = entity.MeetingSubject;
+            parameters.Add(meetingSubjectParam);
+
+            DbParameter isRemoteMeeting = command.CreateParameter();
+            isRemoteMeeting.ParameterName = "IsRemoteMeeting";
+            isRemoteMeeting.Value = entity.IsRemoteMeeting;
+            parameters.Add(isRemoteMeeting);
+
+            DbParameter meetingPlaceParam = command.CreateParameter();
+            meetingPlaceParam.ParameterName = "MeetingPlace";
+            meetingPlaceParam.Value = entity.MeetingPlace;
+            parameters.Add(meetingPlaceParam);
+
+            DbParameter meetingDateParam = command.CreateParameter();
+            meetingDateParam.ParameterName = "MeetingDate";
+            meetingDateParam.Value = entity.MeetingDate;
+            parameters.Add(meetingDateParam);
+
+            DbParameter StartTimeParam = command.CreateParameter();
+            StartTimeParam.ParameterName = "StartTime";
+            StartTimeParam.Value = entity.StartTime;
+            parameters.Add(StartTimeParam);
+            
+            DbParameter endTimeParam = command.CreateParameter();
+            endTimeParam.ParameterName = "EndTime";
+            endTimeParam.Value = entity.EndTime;
+            parameters.Add(endTimeParam);
+
+            return parameters;
+        }
+
+        protected override string SqlInsertCommand()
+        {
+            return @"INSERT INTO [Appointment]
 	            (
 		            [Id_Contact],
 		            [MeetingSubject],
@@ -59,33 +101,11 @@ namespace TaskControlSql.Control
                     @StartTime,
 		            @EndTime 
 	             );";
-
-            sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-            command.CommandText = sqlCommand;
-
-            if (entity.Contact == null)
-                command.Parameters.AddWithValue("Id_Contact", DBNull.Value);
-            else
-                command.Parameters.AddWithValue("Id_Contact", entity.Contact.Id);
-            command.Parameters.AddWithValue("MeetingSubject", entity.MeetingSubject);
-            command.Parameters.AddWithValue("IsRemoteMeeting", entity.IsRemoteMeeting);
-            command.Parameters.AddWithValue("MeetingPlace", entity.MeetingPlace);
-            command.Parameters.AddWithValue("MeetingDate", entity.MeetingDate);
-            command.Parameters.AddWithValue("StartTime", entity.StartTime);
-            command.Parameters.AddWithValue("EndTime", entity.EndTime);
-
-            return command;
         }
 
-        protected override DbCommand ExecuteDBUpdate(Appointment entity, DbConnection conectionDatabase)
+        protected override string SqlUpdateCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"UPDATE [Appointment] 
+            return @"UPDATE [Appointment] 
 				SET
 		            [Id_Contact] = @Id_Contact,
 		            [MeetingSubject] = @MeetingSubject,
@@ -96,34 +116,11 @@ namespace TaskControlSql.Control
 		            [EndTime] = @EndTime
 
 				WHERE [Id] = @Id;";
-
-            sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-            command.CommandText = sqlCommand;
-
-            if (entity.Contact == null)
-                command.Parameters.AddWithValue("Id_Contact", DBNull.Value);
-            else
-                command.Parameters.AddWithValue("Id_Contact", entity.Contact.Id);
-            command.Parameters.AddWithValue("MeetingSubject", entity.MeetingSubject);
-            command.Parameters.AddWithValue("IsRemoteMeeting", entity.IsRemoteMeeting);
-            command.Parameters.AddWithValue("MeetingPlace", entity.MeetingPlace);
-            command.Parameters.AddWithValue("MeetingDate", entity.MeetingDate);
-            command.Parameters.AddWithValue("StartTime", entity.StartTime);
-            command.Parameters.AddWithValue("EndTime", entity.EndTime);
-            command.Parameters.AddWithValue("Id", entity.Id);
-
-            return command;
         }
 
-        protected override DbCommand ExecuteDBSelectEntity(int id, DbConnection conectionDatabase)
+        protected override string SqlSelectEntityCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"SELECT
+            return @"SELECT
                     [Id],
 		            [Id_Contact],
 		            [MeetingSubject],
@@ -136,23 +133,11 @@ namespace TaskControlSql.Control
 					[Appointment]
 				WHERE
 					[Id] = @Id; ";
-
-            sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", id);
-            return command;
         }
 
-        protected override DbCommand ExecuteDBSelectAll(DbConnection conectionDatabase)
+        protected override string SqlSelectAllCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"SELECT
+            return @"SELECT
                     [Id],
 		            [Id_Contact],
 		            [MeetingSubject],
@@ -163,58 +148,26 @@ namespace TaskControlSql.Control
 		            [EndTime]
 	            FROM 
 					[Appointment]";
-
-            command.CommandText = sqlCommand;
-
-            return command;
         }
 
-        protected override DbCommand ExecuteDBExistEntity(int id, DbConnection conectionDatabase)
+        protected override string SqlExistEntityCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"SELECT
+            return @"SELECT
 		            COUNT(*) 
 	            FROM 
 					[Appointment]
 				WHERE
 					[Id] = @Id;";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", id);
-            return command;
         }
 
-        protected override DbCommand ExecuteDBDeleteEntity(int id, DbConnection conectionDatabase)
+        protected override string SqlDeleteEntityCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"DELETE FROM [Appointment] WHERE [Id] = @Id";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", id);
-            return command;
+            return @"DELETE FROM [Appointment] WHERE [Id] = @Id";
         }
 
-        protected override DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase)
+        protected override string SqlDeleteAllCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"DELETE FROM Appointment";
-
-            command.CommandText = sqlCommand;
-            return command;
+            return @"DELETE FROM [Appointment]";
         }
     }
 }

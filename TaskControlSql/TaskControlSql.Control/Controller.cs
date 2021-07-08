@@ -14,16 +14,15 @@ namespace TaskControlSql.Control
     public abstract class Controller<T> where T : Entity
     {
         public static readonly string databaseType = ConfigurationManager.AppSettings["databaseType"].ToLower();
-
+        protected abstract List<DbParameter> ReceiveEntityParameters(T entity, DbCommand command);
         protected abstract T ConvertToEntity(IDataReader reader);
-        protected abstract DbCommand ExecuteDBInsert(T entity, DbConnection conectionDatabase);
-        protected abstract DbCommand ExecuteDBUpdate(T entity, DbConnection conectionDatabase);
-        protected abstract DbCommand ExecuteDBSelectEntity(int id, DbConnection conectionDatabase);
-        protected abstract DbCommand ExecuteDBSelectAll(DbConnection conectionDatabase);
-        protected abstract DbCommand ExecuteDBExistEntity(int id, DbConnection conectionDatabase);
-        protected abstract DbCommand ExecuteDBDeleteEntity(int id, DbConnection conectionDatabase);
-        protected abstract DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase);
-
+        protected abstract string SqlInsertCommand();
+        protected abstract string SqlUpdateCommand();
+        protected abstract string SqlSelectEntityCommand();
+        protected abstract string SqlSelectAllCommand();
+        protected abstract string SqlExistEntityCommand();
+        protected abstract string SqlDeleteEntityCommand();
+        protected abstract string SqlDeleteAllCommand();
 
         public string CreateEntity(T entity)
         {
@@ -176,6 +175,162 @@ namespace TaskControlSql.Control
             }
             connection.Open();
             return connection;
+        }
+
+        protected DbCommand ExecuteDBInsert(T entity, DbConnection conectionDatabase)
+        {
+
+            DbCommand command;
+            string selectScopeCommand;
+            if (databaseType == "sql")
+            {
+                command = new SqlCommand();
+                selectScopeCommand = @"SELECT SCOPE_IDENTITY();";
+            }
+            else
+            {
+                command = new SQLiteCommand();
+                selectScopeCommand = @"SELECT last_insert_rowid();";
+            }
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlInsertCommand() + selectScopeCommand;
+
+            List<DbParameter> parameterList = ReceiveEntityParameters(entity, command);
+
+            foreach (DbParameter param in parameterList)
+            {
+                command.Parameters.Add(param);
+            }
+
+            return command;
+        }
+
+        protected DbCommand ExecuteDBUpdate(T entity, DbConnection conectionDatabase)
+        {
+            DbCommand command;
+            string selectScopeCommand;
+            if (databaseType == "sql")
+            {
+                command = new SqlCommand();
+                selectScopeCommand = @"SELECT SCOPE_IDENTITY();";
+            }
+            else
+            {
+                command = new SQLiteCommand();
+                selectScopeCommand = @"SELECT last_insert_rowid();";
+            }
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlUpdateCommand() + selectScopeCommand;
+
+            List<DbParameter> parameterList = ReceiveEntityParameters(entity, command);
+
+            foreach (DbParameter param in parameterList)
+            {
+                command.Parameters.Add(param);
+            }
+
+            DbParameter parameterId = command.CreateParameter();
+            parameterId.ParameterName = "Id";
+            parameterId.Value = entity.Id;
+            command.Parameters.Add(parameterId);
+
+            return command;
+        }
+
+        protected DbCommand ExecuteDBSelectEntity(int id, DbConnection conectionDatabase)
+        {
+            DbCommand command;
+
+            if (databaseType == "sql")
+                command = new SqlCommand();
+            else
+                command = new SQLiteCommand();
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlSelectEntityCommand();
+
+            DbParameter parameterId = command.CreateParameter();
+            parameterId.ParameterName = "Id";
+            parameterId.Value = id;
+            command.Parameters.Add(parameterId);
+
+
+            return command;
+        }
+
+        protected DbCommand ExecuteDBSelectAll(DbConnection conectionDatabase)
+        {
+            DbCommand command;
+            if (databaseType == "sql")
+                command = new SqlCommand();
+            else
+                command = new SQLiteCommand();
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlSelectAllCommand();
+
+            return command;
+        }
+
+        protected DbCommand ExecuteDBExistEntity(int id, DbConnection conectionDatabase)
+        {
+            DbCommand command;
+            if (databaseType == "sql")
+                command = new SqlCommand();
+            else
+                command = new SQLiteCommand();
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlExistEntityCommand();
+
+            DbParameter parameterId = command.CreateParameter();
+            parameterId.ParameterName = "Id";
+            parameterId.Value = id;
+            command.Parameters.Add(parameterId);
+
+            return command;
+        }
+
+        protected DbCommand ExecuteDBDeleteEntity(int id, DbConnection conectionDatabase)
+        {
+            DbCommand command;
+            if (databaseType == "sql")
+                command = new SqlCommand();
+            else
+                command = new SQLiteCommand();
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlDeleteEntityCommand();
+
+            DbParameter parameterId = command.CreateParameter();
+            parameterId.ParameterName = "Id";
+            parameterId.Value = id;
+            command.Parameters.Add(parameterId);
+
+            return command;
+        }
+        
+        protected DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase)  // to reseed " DBCC CHECKIDENT('TodoTask', RESEED, 0)";
+        {
+            DbCommand command;
+
+            if (databaseType == "sql")
+                command = new SqlCommand();
+            else
+                command = new SQLiteCommand();
+
+            command.Connection = conectionDatabase;
+
+            command.CommandText = SqlDeleteAllCommand();
+            return command;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -28,14 +29,44 @@ namespace TaskControlSql.Control
             return task;
         }
 
-        protected override DbCommand ExecuteDBInsert(TodoTask entity, DbConnection conectionDatabase)
+        protected override List<DbParameter> ReceiveEntityParameters(TodoTask entity, DbCommand command)
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
+            List<DbParameter> parameters = new List<DbParameter>();
 
-            string sqlCommand = @"INSERT INTO [TodoTask]
+            DbParameter priorityParam = command.CreateParameter();
+            priorityParam.ParameterName = "Priority";
+            priorityParam.Value = entity.Priority;
+            parameters.Add(priorityParam);
+
+            DbParameter titleParam = command.CreateParameter();
+            titleParam.ParameterName = "Title";
+            titleParam.Value = entity.Title;
+            parameters.Add(titleParam);
+
+            DbParameter dateCreationParam = command.CreateParameter();
+            dateCreationParam.ParameterName = "DateCreation";
+            dateCreationParam.Value = entity.CreationTime;
+            parameters.Add(dateCreationParam);
+
+            DbParameter dateConclusionParam = command.CreateParameter();
+            dateConclusionParam.ParameterName = "DateConclusion";
+            object dateConclusionValue = DBNull.Value;
+            if (entity.ConclusionTime != null)
+                dateConclusionValue = entity.ConclusionTime;
+            dateConclusionParam.Value = dateConclusionValue;
+            parameters.Add(dateConclusionParam);
+
+            DbParameter percentageConcludedParam = command.CreateParameter();
+            percentageConcludedParam.ParameterName = "PercentageConcluded";
+            percentageConcludedParam.Value = entity.PercentageConcluded;
+            parameters.Add(percentageConcludedParam);
+
+            return parameters;
+        }
+
+        protected override string SqlInsertCommand()
+        {
+            return @"INSERT INTO [TodoTask]
 	            (
 		            [Priority],
 		            [Title],
@@ -51,31 +82,11 @@ namespace TaskControlSql.Control
 		            @DateConclusion,
 		            @PercentageConcluded
 	             );";
-
-            sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Priority", entity.Priority);
-            command.Parameters.AddWithValue("Title", entity.Title);
-            command.Parameters.AddWithValue("DateCreation", entity.CreationTime);
-            if (entity.ConclusionTime == null)
-                command.Parameters.AddWithValue("DateConclusion", DBNull.Value);
-            else
-                command.Parameters.AddWithValue("DateConclusion", entity.ConclusionTime);
-            command.Parameters.AddWithValue("PercentageConcluded", entity.PercentageConcluded);
-
-            return command;
         }
 
-        protected override DbCommand ExecuteDBUpdate(TodoTask entity, DbConnection conectionDatabase)
+        protected override string SqlUpdateCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"UPDATE [TodoTask] 
+           return @"UPDATE [TodoTask] 
 				SET
 		            [Priority] = @Priority,
 		            [Title] = @Title,
@@ -83,31 +94,11 @@ namespace TaskControlSql.Control
 		            [PercentageConcluded] = @PercentageConcluded
 
 				WHERE [Id] = @Id;";
-
-            sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", entity.Id);
-            command.Parameters.AddWithValue("Priority", entity.Priority);
-            command.Parameters.AddWithValue("Title", entity.Title);
-            if (entity.ConclusionTime == null)
-                command.Parameters.AddWithValue("DateConclusion", DBNull.Value);
-            else
-                command.Parameters.AddWithValue("DateConclusion", entity.ConclusionTime);
-            command.Parameters.AddWithValue("PercentageConcluded", entity.PercentageConcluded);
-
-            return command;
         }
 
-        protected override DbCommand ExecuteDBSelectEntity(int id, DbConnection conectionDatabase)
+        protected override string SqlSelectEntityCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"SELECT
+            return @"SELECT
 		            [Id],
 		            [Priority],
 		            [Title],
@@ -118,23 +109,11 @@ namespace TaskControlSql.Control
 					[TodoTask]
 				WHERE
 					[Id] = @Id;";
-
-            sqlCommand += @"SELECT SCOPE_IDENTITY();";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", id);
-            return command;
         }
 
-        protected override DbCommand ExecuteDBSelectAll(DbConnection conectionDatabase)
+        protected override string SqlSelectAllCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"SELECT
+            return @"SELECT
 		            [Id],
 		            [Priority],
 		            [Title],
@@ -143,59 +122,26 @@ namespace TaskControlSql.Control
 		            [PercentageConcluded]
 	            FROM 
 					[TodoTask]";
-
-            command.CommandText = sqlCommand;
-
-            return command;
         }
 
-        protected override DbCommand ExecuteDBExistEntity(int id, DbConnection conectionDatabase)
+        protected override string SqlExistEntityCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"SELECT
+            return @"SELECT
 		            COUNT(*) 
 	            FROM 
 					[TodoTask]
 				WHERE
 					[Id] = @Id;";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", id);
-            return command;
         }
 
-        protected override DbCommand ExecuteDBDeleteEntity(int id, DbConnection conectionDatabase)
+        protected override string SqlDeleteEntityCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"DELETE FROM [TodoTask] WHERE [Id] = @Id";
-
-            command.CommandText = sqlCommand;
-
-            command.Parameters.AddWithValue("Id", id);
-            return command;
+            return @"DELETE FROM [TodoTask] WHERE [Id] = @Id"; ;
         }
 
-        protected override DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase)
+        protected override string SqlDeleteAllCommand()
         {
-            SqlCommand command = new SqlCommand
-            {
-                Connection = (SqlConnection)conectionDatabase
-            };
-
-            string sqlCommand = @"DELETE FROM TodoTask;";
-            sqlCommand += " DBCC CHECKIDENT('TodoTask', RESEED, 0)";
-
-            command.CommandText = sqlCommand;
-            return command;
+            return @"DELETE FROM TodoTask;";
         }
     }
 }
