@@ -10,7 +10,7 @@ namespace TaskControlSql.ConsoleApp
     {
         ContactController contactController;
 
-        public AppointmentMenu(AppoitmentController appoitmentController, ContactController contactController, ConsoleColor fontColor)
+        public AppointmentMenu(AppointmentController appoitmentController, ContactController contactController, ConsoleColor fontColor)
         {
             this.mainController = appoitmentController;
             this.contactController = contactController;

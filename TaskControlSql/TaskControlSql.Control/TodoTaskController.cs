@@ -28,7 +28,7 @@ namespace TaskControlSql.Control
             return task;
         }
 
-        protected override DbCommand DBInsertCommand(TodoTask entity, DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBInsert(TodoTask entity, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
@@ -68,7 +68,7 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override DbCommand DBUpdateCommand(TodoTask entity, DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBUpdate(TodoTask entity, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
@@ -100,7 +100,7 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override DbCommand DBSelectEntityCommand(int id, DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBSelectEntity(int id, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
@@ -127,7 +127,7 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override DbCommand DBSelectAllCommand(DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBSelectAll(DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
@@ -149,7 +149,7 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override DbCommand DBExistEntityCommand(int id, DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBExistEntity(int id, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
@@ -169,7 +169,7 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override DbCommand DBDeleteEntityCommand(int id, DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBDeleteEntity(int id, DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {
@@ -184,7 +184,7 @@ namespace TaskControlSql.Control
             return command;
         }
 
-        protected override DbCommand DBDeleteAllCommand(DbConnection conectionDatabase)
+        protected override DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase)
         {
             SqlCommand command = new SqlCommand
             {

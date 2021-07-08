@@ -7,14 +7,14 @@ namespace TaskControlSql.ConsoleApp
     {
         TodoTaskController taskController;
         ContactController contactController;
-        AppoitmentController appoitmentController;
+        AppointmentController appoitmentController;
 
         public MainMenu(ConsoleColor fontColor)
         {
             this.fontColor = fontColor;
             taskController = new TodoTaskController();
             contactController = new ContactController();
-            appoitmentController = new AppoitmentController(contactController);
+            appoitmentController = new AppointmentController(contactController);
         }
 
         public override void ShowMenu()

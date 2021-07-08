@@ -16,19 +16,19 @@ namespace TaskControlSql.Control
         public static readonly string databaseType = ConfigurationManager.AppSettings["databaseType"].ToLower();
 
         protected abstract T ConvertToEntity(IDataReader reader);
-        protected abstract DbCommand DBInsertCommand(T entity, DbConnection conectionDatabase);
-        protected abstract DbCommand DBUpdateCommand(T entity, DbConnection conectionDatabase);
-        protected abstract DbCommand DBSelectEntityCommand(int id, DbConnection conectionDatabase);
-        protected abstract DbCommand DBSelectAllCommand(DbConnection conectionDatabase);
-        protected abstract DbCommand DBExistEntityCommand(int id, DbConnection conectionDatabase);
-        protected abstract DbCommand DBDeleteEntityCommand(int id, DbConnection conectionDatabase);
-        protected abstract DbCommand DBDeleteAllCommand(DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBInsert(T entity, DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBUpdate(T entity, DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBSelectEntity(int id, DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBSelectAll(DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBExistEntity(int id, DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBDeleteEntity(int id, DbConnection conectionDatabase);
+        protected abstract DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase);
 
 
         public string CreateEntity(T entity)
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandInsertEntity = DBInsertCommand(entity, conectionDatabase);
+            DbCommand commandInsertEntity = ExecuteDBInsert(entity, conectionDatabase);
 
             string operationMessage;
             try
@@ -48,7 +48,7 @@ namespace TaskControlSql.Control
         public bool ExistEntity(int index)
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandExistEntity = DBExistEntityCommand(index, conectionDatabase);
+            DbCommand commandExistEntity = ExecuteDBExistEntity(index, conectionDatabase);
 
             int numberRows = Convert.ToInt32(commandExistEntity.ExecuteScalar());
             bool result = numberRows > 0;
@@ -60,7 +60,7 @@ namespace TaskControlSql.Control
         public T ReceiveEntity(int index)
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandReceiveEntity = DBSelectEntityCommand(index, conectionDatabase);
+            DbCommand commandReceiveEntity = ExecuteDBSelectEntity(index, conectionDatabase);
 
             T entity = null;
 
@@ -77,7 +77,7 @@ namespace TaskControlSql.Control
         public List<T> ReceiveAllEntities()
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandReceiveAllEntities = DBSelectAllCommand(conectionDatabase);
+            DbCommand commandReceiveAllEntities = ExecuteDBSelectAll(conectionDatabase);
 
             List<T> entities = new List<T>();
 
@@ -96,7 +96,7 @@ namespace TaskControlSql.Control
         public string UpdateEntity(T entity)
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandUpdate = DBUpdateCommand(entity, conectionDatabase);
+            DbCommand commandUpdate = ExecuteDBUpdate(entity, conectionDatabase);
 
             string operationMessage;
             try
@@ -116,7 +116,7 @@ namespace TaskControlSql.Control
         public bool DeleteEntity(int index)
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandDeleteEntity = DBDeleteEntityCommand(index, conectionDatabase);
+            DbCommand commandDeleteEntity = ExecuteDBDeleteEntity(index, conectionDatabase);
 
             bool result;
 
@@ -133,7 +133,7 @@ namespace TaskControlSql.Control
         public string DeleteAllEntities()
         {
             DbConnection conectionDatabase = ConnectToDatabase();
-            DbCommand commandDeleteAll = DBDeleteAllCommand(conectionDatabase);
+            DbCommand commandDeleteAll = ExecuteDBDeleteAll(conectionDatabase);
 
             string operationMessage;
             try

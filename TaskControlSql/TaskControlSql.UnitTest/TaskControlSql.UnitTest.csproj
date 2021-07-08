@@ -68,6 +68,8 @@
     <Compile Include="TodoTaskControllerTest.cs" />
     <Compile Include="ContactControllerTest.cs" />
     <Compile Include="ContactTest.cs" />
+    <Compile Include="AppointmentTest.cs" />
+    <Compile Include="AppointmentControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
