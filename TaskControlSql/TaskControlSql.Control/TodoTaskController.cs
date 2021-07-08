@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using TaskControlSql.Domain;
 
 namespace TaskControlSql.Control
@@ -86,7 +85,7 @@ namespace TaskControlSql.Control
 
         protected override string SqlUpdateCommand()
         {
-           return @"UPDATE [TodoTask] 
+            return @"UPDATE [TodoTask] 
 				SET
 		            [Priority] = @Priority,
 		            [Title] = @Title,

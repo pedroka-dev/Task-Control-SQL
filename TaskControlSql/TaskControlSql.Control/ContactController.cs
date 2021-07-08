@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
-using System.Data.SQLite;
 using TaskControlSql.Domain;
 
 namespace TaskControlSql.Control
@@ -23,9 +21,9 @@ namespace TaskControlSql.Control
             return contact;
         }
 
-        protected override List<DbParameter> ReceiveEntityParameters(Contact entity,DbCommand command)
+        protected override List<DbParameter> ReceiveEntityParameters(Contact entity, DbCommand command)
         {
-            List<DbParameter> parameters = new List<DbParameter>(); 
+            List<DbParameter> parameters = new List<DbParameter>();
 
             DbParameter nameParam = command.CreateParameter();
             nameParam.ParameterName = "Name";

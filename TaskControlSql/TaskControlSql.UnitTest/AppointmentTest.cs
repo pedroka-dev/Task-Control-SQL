@@ -7,7 +7,7 @@ namespace TaskControlSql.UnitTest
 {
     [TestClass]
     public class AppointmentTest
-    {   
+    {
         [TestMethod]
         public void Should_InstantiateAppoitment_Correctly()
         {

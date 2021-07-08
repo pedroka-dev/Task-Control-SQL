@@ -149,7 +149,7 @@ namespace TaskControlSql.Control
             return operationMessage;
         }
 
-        protected static DbConnection ConnectToDatabase()       //colocar as ConnectionString no App.config
+        protected static DbConnection ConnectToDatabase()
         {
             DbConnection connection = null;
 
@@ -157,7 +157,7 @@ namespace TaskControlSql.Control
             {
                 connection = new SqlConnection
                 {
-                    ConnectionString = @"Data Source=(LocalDb)\MSSqlLocalDB;Initial Catalog=DBTaskControl;Integrated Security=True;Pooling=False"
+                    ConnectionString = ConfigurationManager.AppSettings["sqlConnectionString"]
                 };
                 ;
             }
@@ -165,7 +165,7 @@ namespace TaskControlSql.Control
             {
                 connection = new SQLiteConnection
                 {
-                    ConnectionString = @"Data Source=\Users\Pedroska\Documents\GitHub\Task-Control-SQL\TaskControlSql\TaskControlSql.Control\bin\Database\DBTaskControlSqLite.db"
+                    ConnectionString = ConfigurationManager.AppSettings["sqliteConnectionString"]
                 };
                 ;
             }
@@ -317,7 +317,7 @@ namespace TaskControlSql.Control
 
             return command;
         }
-        
+
         protected DbCommand ExecuteDBDeleteAll(DbConnection conectionDatabase)  // to reseed " DBCC CHECKIDENT('TodoTask', RESEED, 0)";
         {
             DbCommand command;

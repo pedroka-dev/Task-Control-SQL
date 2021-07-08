@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using TaskControlSql.Domain;
 
 namespace TaskControlSql.Control
@@ -70,7 +69,7 @@ namespace TaskControlSql.Control
             StartTimeParam.ParameterName = "StartTime";
             StartTimeParam.Value = entity.StartTime;
             parameters.Add(StartTimeParam);
-            
+
             DbParameter endTimeParam = command.CreateParameter();
             endTimeParam.ParameterName = "EndTime";
             endTimeParam.Value = entity.EndTime;
