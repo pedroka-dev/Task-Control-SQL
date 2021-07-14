@@ -78,7 +78,7 @@ namespace TaskControlSql.View
             this.label1.TabIndex = 3;
             this.label1.Text = "Select a Menu";
             // 
-            // ScheduleControlScreen
+            // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,7 +88,8 @@ namespace TaskControlSql.View
             this.Controls.Add(this.btnManageContacts);
             this.Controls.Add(this.btnManageTasks);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "ScheduleControlScreen";
+            this.MaximizeBox = false;
+            this.Name = "MainScreen";
             this.Text = "Schedule Control";
             this.Load += new System.EventHandler(this.ScheduleControlScreen_Load);
             this.ResumeLayout(false);

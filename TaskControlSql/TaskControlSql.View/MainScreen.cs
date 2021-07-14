@@ -32,7 +32,8 @@ namespace TaskControlSql.View
 
         private void btnManageTasks_Click(object sender, EventArgs e)
         {
-
+            TodoTaskScreen menuScreen = new TodoTaskScreen(taskController);
+            menuScreen.Show();
         }
 
         private void btnManageContacts_Click(object sender, EventArgs e)
