@@ -32,7 +32,7 @@ namespace TaskControlSql.View
             this.btnManageTasks = new System.Windows.Forms.Button();
             this.btnManageContacts = new System.Windows.Forms.Button();
             this.btnManageAppoitments = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelSelectMenu = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnManageTasks
@@ -68,22 +68,22 @@ namespace TaskControlSql.View
             this.btnManageAppoitments.UseVisualStyleBackColor = true;
             this.btnManageAppoitments.Click += new System.EventHandler(this.btnManageAppoitments_Click);
             // 
-            // label1
+            // labelSelectMenu
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Select a Menu";
+            this.labelSelectMenu.AutoSize = true;
+            this.labelSelectMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelectMenu.Location = new System.Drawing.Point(25, 23);
+            this.labelSelectMenu.Name = "labelSelectMenu";
+            this.labelSelectMenu.Size = new System.Drawing.Size(124, 20);
+            this.labelSelectMenu.TabIndex = 3;
+            this.labelSelectMenu.Text = "Select a Menu";
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(170, 241);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelSelectMenu);
             this.Controls.Add(this.btnManageAppoitments);
             this.Controls.Add(this.btnManageContacts);
             this.Controls.Add(this.btnManageTasks);
@@ -102,7 +102,7 @@ namespace TaskControlSql.View
         private System.Windows.Forms.Button btnManageTasks;
         private System.Windows.Forms.Button btnManageContacts;
         private System.Windows.Forms.Button btnManageAppoitments;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelSelectMenu;
     }
 }
 

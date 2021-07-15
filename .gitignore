@@ -54,3 +54,5 @@ TaskControlSql/TaskControlSql.View/obj/Debug/TaskControlSql.View.ScheduleControl
 TaskControlSql/TaskControlSql.View/obj/Debug/TaskControlSql.View.TodoTaskScreen.resources
 TaskControlSql/TaskControlSql.View/obj/Debug/TaskControlSql.View.MainScreen.resources
 TaskControlSql/TaskControlSql.View/obj/Debug/TaskControlSql.View.csproj.CopyComplete
+TaskControlSql/TaskControlSql.View/obj/Debug/TaskControlSql.View.ManageTodoTaskScreen.resources
+TaskControlSql/TaskControlSql.View/obj/Debug/TaskControlSql.View.AddTodoTaskScreen.resources
