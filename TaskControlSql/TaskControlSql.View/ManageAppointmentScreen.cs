@@ -53,8 +53,8 @@ namespace TaskControlSql.View
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //AddAppointmentScreen addEntityScreen = new AddAppointmenScreen(mainController);
-            //addEntityScreen.ShowDialog();
+            AddAppointmentScreen addEntityScreen = new AddAppointmentScreen(mainController);
+            addEntityScreen.ShowDialog();
             LoadEntitiesToDatagrid();
         }
 
