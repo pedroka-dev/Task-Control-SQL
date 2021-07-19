@@ -39,7 +39,8 @@ namespace TaskControlSql.View
 
         private void btnManageAppoitments_Click(object sender, EventArgs e)
         {
-
+            ManageAppointmentScreen menuScreen = new ManageAppointmentScreen(appoitmentController);
+            menuScreen.ShowDialog();
         }
     }
 }
