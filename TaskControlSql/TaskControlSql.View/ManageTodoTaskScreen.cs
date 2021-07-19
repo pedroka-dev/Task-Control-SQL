@@ -24,11 +24,22 @@ namespace TaskControlSql.View
             LoadEntitiesToDatagrid();
         }
 
-        private void LoadEntitiesToDatagrid()     //manual insertion?
+        private void LoadEntitiesToDatagrid()
         {
-            //dataGridTodoTask.Rows.Clear();
-
             listEntities = mainController.ReceiveAllEntities();
+
+            dtTodoTask.Clear();
+            foreach (TodoTask item in listEntities)
+            {
+                DataRow entityRow = dtTodoTask.NewRow();
+                entityRow["Id"] = item.Id;
+                entityRow["Title"] = item.Title;
+                entityRow["Priority"] = item.Priority;
+                entityRow["CreationTime"] = item.CreationTime.ToString();
+                entityRow["PercentageConcluded"] = item.PercentageConcluded;
+                entityRow["ConclusionTime"] = item.ConclusionTime;
+                dtTodoTask.Rows.Add(entityRow);
+            }
 
             dataGridTodoTask.DataSource = listEntities;
         }
@@ -42,7 +53,11 @@ namespace TaskControlSql.View
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-
+            int selectedIndex = listEntities.ElementAt(dataGridTodoTask.CurrentCell.RowIndex).Id;
+            TodoTask todoTask = mainController.ReceiveEntity(selectedIndex);
+            EditTodoTaskScreen editTodoTaskScreen = new EditTodoTaskScreen(todoTask, mainController);
+            editTodoTaskScreen.ShowDialog();
+            LoadEntitiesToDatagrid();
         }
 
         private void btnDeleteEntity_Click(object sender, EventArgs e)
@@ -57,9 +72,14 @@ namespace TaskControlSql.View
                 if (dialogResult == DialogResult.Yes)
                 {
                     int selectedIndex = listEntities.ElementAt(dataGridTodoTask.CurrentCell.RowIndex).Id;
-                    mainController.DeleteEntity(selectedIndex);
+                    
+                    if (mainController.DeleteEntity(selectedIndex))
+                        MessageBox.Show("Sucessfully deleted Task.", "Operation Sucessful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                        MessageBox.Show("Error: Task not found", "Operation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     LoadEntitiesToDatagrid();
-                    //MessageBox.Show("Debug. Selected ID = " + selectedIndex);
+                    
                 }
             }
         }

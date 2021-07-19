@@ -92,8 +92,8 @@ namespace TaskControlSql.View
             this.cmbPriority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPriority.Items.AddRange(new object[] {
             "LOW",
-            "HIGH",
-            "MEDIUM"});
+            "MEDIUM",
+            "HIGH"});
             this.cmbPriority.Location = new System.Drawing.Point(8, 78);
             this.cmbPriority.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPriority.Name = "cmbPriority";
