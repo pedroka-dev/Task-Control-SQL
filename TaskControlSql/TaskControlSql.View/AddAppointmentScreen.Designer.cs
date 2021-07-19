@@ -224,7 +224,7 @@ namespace TaskControlSql.View
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddAppointmentScreen";
-            this.Text = "Add Appointment";
+            this.Text = "Edit Appointment";
             this.groupBoxTodoTask.ResumeLayout(false);
             this.groupBoxTodoTask.PerformLayout();
             this.ResumeLayout(false);

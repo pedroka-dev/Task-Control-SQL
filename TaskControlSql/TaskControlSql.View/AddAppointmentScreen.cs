@@ -40,7 +40,7 @@ namespace TaskControlSql.View
                 string meetingSubject = txtMeetingPlace.Text;
                 bool isRemoteMeeting = chkIsRemoteMeeting.Checked;
                 string meetingPlace = txtMeetingPlace.Text;
-                DateTime meetingDate = dateMeetingDate.Value;
+                DateTime meetingDate = dateMeetingDate.Value.Date;
                 DateTime startTimeAux = dateStartTime.Value;
                 DateTime endTimeAux = dateEndTime.Value;
 

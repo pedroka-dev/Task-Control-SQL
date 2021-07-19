@@ -62,8 +62,8 @@ namespace TaskControlSql.View
         {
             int selectedIndex = listEntities.ElementAt(dataGridAppointment.CurrentCell.RowIndex).Id;
             Appointment appointment = mainController.ReceiveEntity(selectedIndex);
-            //EditAppointmenScreen editEntityScreen = new EditAppointmenScreen(appointment, mainController);
-            //editEntityScreen.ShowDialog();
+            EditAppointmentScreen editEntityScreen = new EditAppointmentScreen(appointment, mainController);
+            editEntityScreen.ShowDialog();
             LoadEntitiesToDatagrid();
         }
 

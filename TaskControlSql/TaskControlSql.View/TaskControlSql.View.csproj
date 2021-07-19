@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditAppointmentScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditAppointmentScreen.Designer.cs">
+      <DependentUpon>EditAppointmentScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddAppointmentScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="ManageTodoTaskScreen.Designer.cs">
       <DependentUpon>ManageTodoTaskScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditAppointmentScreen.resx">
+      <DependentUpon>EditAppointmentScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddAppointmentScreen.resx">
       <DependentUpon>AddAppointmentScreen.cs</DependentUpon>
     </EmbeddedResource>
