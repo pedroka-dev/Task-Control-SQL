@@ -119,7 +119,7 @@ namespace TaskControlSql.View
             this.cmbContact.Location = new System.Drawing.Point(11, 43);
             this.cmbContact.Name = "cmbContact";
             this.cmbContact.Size = new System.Drawing.Size(183, 24);
-            this.cmbContact.TabIndex = 17;
+            this.cmbContact.TabIndex = 1;
             // 
             // labelEndTime
             // 

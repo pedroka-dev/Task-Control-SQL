@@ -119,7 +119,7 @@ namespace TaskControlSql.View
             this.cmbContact.Location = new System.Drawing.Point(11, 43);
             this.cmbContact.Name = "cmbContact";
             this.cmbContact.Size = new System.Drawing.Size(183, 24);
-            this.cmbContact.TabIndex = 17;
+            this.cmbContact.TabIndex = 1;
             // 
             // labelEndTime
             // 
@@ -215,7 +215,7 @@ namespace TaskControlSql.View
             this.labelContact.TabIndex = 0;
             this.labelContact.Text = "Contact:";
             // 
-            // AddAppointmentScreen
+            // EditAppointmentScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -223,7 +223,7 @@ namespace TaskControlSql.View
             this.Controls.Add(this.groupBoxTodoTask);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "AddAppointmentScreen";
+            this.Name = "EditAppointmentScreen";
             this.Text = "Add Appointment";
             this.groupBoxTodoTask.ResumeLayout(false);
             this.groupBoxTodoTask.PerformLayout();
