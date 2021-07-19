@@ -29,11 +29,20 @@ namespace TaskControlSql.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageAppointmentScreen));
             this.groupBoxTodoTask = new System.Windows.Forms.GroupBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDeleteEntity = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dataGridAppointment = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.meetingSubjectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isRemoteMeetingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.meetingPlaceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.meetingDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataSetAppointment = new System.Data.DataSet();
             this.dtAppointment = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
@@ -44,14 +53,6 @@ namespace TaskControlSql.View
             this.dataColumn6 = new System.Data.DataColumn();
             this.dataColumn7 = new System.Data.DataColumn();
             this.dataColumn8 = new System.Data.DataColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contactDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.meetingSubjectDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isRemoteMeetingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.meetingPlaceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.meetingDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxTodoTask.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAppointment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetAppointment)).BeginInit();
@@ -139,65 +140,6 @@ namespace TaskControlSql.View
             this.dataGridAppointment.Size = new System.Drawing.Size(600, 325);
             this.dataGridAppointment.TabIndex = 0;
             // 
-            // dataSetAppointment
-            // 
-            this.dataSetAppointment.DataSetName = "dataSetAppointment";
-            this.dataSetAppointment.Tables.AddRange(new System.Data.DataTable[] {
-            this.dtAppointment});
-            // 
-            // dtAppointment
-            // 
-            this.dtAppointment.Columns.AddRange(new System.Data.DataColumn[] {
-            this.dataColumn1,
-            this.dataColumn2,
-            this.dataColumn3,
-            this.dataColumn4,
-            this.dataColumn5,
-            this.dataColumn6,
-            this.dataColumn7,
-            this.dataColumn8});
-            this.dtAppointment.TableName = "TableAppointment";
-            // 
-            // dataColumn1
-            // 
-            this.dataColumn1.Caption = "Id";
-            this.dataColumn1.ColumnName = "Id";
-            // 
-            // dataColumn2
-            // 
-            this.dataColumn2.Caption = "Contact";
-            this.dataColumn2.ColumnName = "Contact";
-            // 
-            // dataColumn3
-            // 
-            this.dataColumn3.Caption = "Meeting Subject";
-            this.dataColumn3.ColumnName = "MeetingSubject";
-            // 
-            // dataColumn4
-            // 
-            this.dataColumn4.Caption = "Is Remote Meeting";
-            this.dataColumn4.ColumnName = "IsRemoteMeeting";
-            // 
-            // dataColumn5
-            // 
-            this.dataColumn5.Caption = "Meeting Place";
-            this.dataColumn5.ColumnName = "MeetingPlace";
-            // 
-            // dataColumn6
-            // 
-            this.dataColumn6.Caption = "Meeting Date";
-            this.dataColumn6.ColumnName = "MeetingDate";
-            // 
-            // dataColumn7
-            // 
-            this.dataColumn7.Caption = "Start Time";
-            this.dataColumn7.ColumnName = "StartTime";
-            // 
-            // dataColumn8
-            // 
-            this.dataColumn8.Caption = "End Time";
-            this.dataColumn8.ColumnName = "EndTime";
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
@@ -270,6 +212,65 @@ namespace TaskControlSql.View
             this.endTimeDataGridViewTextBoxColumn.ReadOnly = true;
             this.endTimeDataGridViewTextBoxColumn.Width = 125;
             // 
+            // dataSetAppointment
+            // 
+            this.dataSetAppointment.DataSetName = "dataSetAppointment";
+            this.dataSetAppointment.Tables.AddRange(new System.Data.DataTable[] {
+            this.dtAppointment});
+            // 
+            // dtAppointment
+            // 
+            this.dtAppointment.Columns.AddRange(new System.Data.DataColumn[] {
+            this.dataColumn1,
+            this.dataColumn2,
+            this.dataColumn3,
+            this.dataColumn4,
+            this.dataColumn5,
+            this.dataColumn6,
+            this.dataColumn7,
+            this.dataColumn8});
+            this.dtAppointment.TableName = "TableAppointment";
+            // 
+            // dataColumn1
+            // 
+            this.dataColumn1.Caption = "Id";
+            this.dataColumn1.ColumnName = "Id";
+            // 
+            // dataColumn2
+            // 
+            this.dataColumn2.Caption = "Contact";
+            this.dataColumn2.ColumnName = "Contact";
+            // 
+            // dataColumn3
+            // 
+            this.dataColumn3.Caption = "Meeting Subject";
+            this.dataColumn3.ColumnName = "MeetingSubject";
+            // 
+            // dataColumn4
+            // 
+            this.dataColumn4.Caption = "Is Remote Meeting";
+            this.dataColumn4.ColumnName = "IsRemoteMeeting";
+            // 
+            // dataColumn5
+            // 
+            this.dataColumn5.Caption = "Meeting Place";
+            this.dataColumn5.ColumnName = "MeetingPlace";
+            // 
+            // dataColumn6
+            // 
+            this.dataColumn6.Caption = "Meeting Date";
+            this.dataColumn6.ColumnName = "MeetingDate";
+            // 
+            // dataColumn7
+            // 
+            this.dataColumn7.Caption = "Start Time";
+            this.dataColumn7.ColumnName = "StartTime";
+            // 
+            // dataColumn8
+            // 
+            this.dataColumn8.Caption = "End Time";
+            this.dataColumn8.ColumnName = "EndTime";
+            // 
             // ManageAppointmentScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -277,6 +278,7 @@ namespace TaskControlSql.View
             this.ClientSize = new System.Drawing.Size(679, 458);
             this.Controls.Add(this.groupBoxTodoTask);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "ManageAppointmentScreen";

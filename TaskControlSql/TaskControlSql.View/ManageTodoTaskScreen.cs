@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TaskControlSql.Control;
 using TaskControlSql.Domain;
@@ -62,7 +58,7 @@ namespace TaskControlSql.View
 
         private void btnDeleteEntity_Click(object sender, EventArgs e)
         {
-            if(dataGridTodoTask.CurrentCell == null)
+            if (dataGridTodoTask.CurrentCell == null)
             {
                 MessageBox.Show("Select at least one Task before attempting Delete operation.", "Invalid Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -72,14 +68,14 @@ namespace TaskControlSql.View
                 if (dialogResult == DialogResult.Yes)
                 {
                     int selectedIndex = listEntities.ElementAt(dataGridTodoTask.CurrentCell.RowIndex).Id;
-                    
+
                     if (mainController.DeleteEntity(selectedIndex))
                         MessageBox.Show("Sucessfully deleted Task.", "Operation Sucessful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
                         MessageBox.Show("Error: Task not found", "Operation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     LoadEntitiesToDatagrid();
-                    
+
                 }
             }
         }

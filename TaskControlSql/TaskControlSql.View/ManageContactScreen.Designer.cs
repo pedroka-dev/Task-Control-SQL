@@ -29,6 +29,7 @@ namespace TaskControlSql.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageContactScreen));
             this.groupBoxContact = new System.Windows.Forms.GroupBox();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDeleteEntity = new System.Windows.Forms.Button();
@@ -60,9 +61,11 @@ namespace TaskControlSql.View
             this.groupBoxContact.Controls.Add(this.btnDeleteEntity);
             this.groupBoxContact.Controls.Add(this.btnAdd);
             this.groupBoxContact.Controls.Add(this.dataGridContact);
-            this.groupBoxContact.Location = new System.Drawing.Point(13, 13);
+            this.groupBoxContact.Location = new System.Drawing.Point(17, 16);
+            this.groupBoxContact.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxContact.Name = "groupBoxContact";
-            this.groupBoxContact.Size = new System.Drawing.Size(483, 345);
+            this.groupBoxContact.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxContact.Size = new System.Drawing.Size(644, 425);
             this.groupBoxContact.TabIndex = 0;
             this.groupBoxContact.TabStop = false;
             this.groupBoxContact.Text = "Registered Contact";
@@ -70,9 +73,10 @@ namespace TaskControlSql.View
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(194, 300);
+            this.btnEdit.Location = new System.Drawing.Point(259, 369);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(98, 32);
+            this.btnEdit.Size = new System.Drawing.Size(131, 39);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -81,9 +85,10 @@ namespace TaskControlSql.View
             // btnDeleteEntity
             // 
             this.btnDeleteEntity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteEntity.Location = new System.Drawing.Point(367, 300);
+            this.btnDeleteEntity.Location = new System.Drawing.Point(489, 369);
+            this.btnDeleteEntity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDeleteEntity.Name = "btnDeleteEntity";
-            this.btnDeleteEntity.Size = new System.Drawing.Size(98, 32);
+            this.btnDeleteEntity.Size = new System.Drawing.Size(131, 39);
             this.btnDeleteEntity.TabIndex = 3;
             this.btnDeleteEntity.Text = "Delete";
             this.btnDeleteEntity.UseVisualStyleBackColor = true;
@@ -92,9 +97,10 @@ namespace TaskControlSql.View
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(15, 300);
+            this.btnAdd.Location = new System.Drawing.Point(20, 369);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(98, 32);
+            this.btnAdd.Size = new System.Drawing.Size(131, 39);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -117,57 +123,70 @@ namespace TaskControlSql.View
             this.dataGridContact.DataMember = "TableContact";
             this.dataGridContact.DataSource = this.dataSetContact;
             this.dataGridContact.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridContact.Location = new System.Drawing.Point(14, 19);
+            this.dataGridContact.Location = new System.Drawing.Point(19, 23);
+            this.dataGridContact.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridContact.MultiSelect = false;
             this.dataGridContact.Name = "dataGridContact";
             this.dataGridContact.ReadOnly = true;
             this.dataGridContact.RowHeadersVisible = false;
             this.dataGridContact.RowHeadersWidth = 45;
             this.dataGridContact.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridContact.Size = new System.Drawing.Size(450, 264);
+            this.dataGridContact.Size = new System.Drawing.Size(600, 325);
             this.dataGridContact.TabIndex = 0;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
             this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // nameDataGridViewTextBoxColumn
             // 
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 125;
             // 
             // emailDataGridViewTextBoxColumn
             // 
             this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
             this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             this.emailDataGridViewTextBoxColumn.ReadOnly = true;
+            this.emailDataGridViewTextBoxColumn.Width = 125;
             // 
             // phoneNumberDataGridViewTextBoxColumn
             // 
             this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
             this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
+            this.phoneNumberDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
             this.phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.phoneNumberDataGridViewTextBoxColumn.Width = 125;
             // 
             // businessCompanyDataGridViewTextBoxColumn
             // 
             this.businessCompanyDataGridViewTextBoxColumn.DataPropertyName = "BusinessCompany";
             this.businessCompanyDataGridViewTextBoxColumn.HeaderText = "BusinessCompany";
+            this.businessCompanyDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.businessCompanyDataGridViewTextBoxColumn.Name = "businessCompanyDataGridViewTextBoxColumn";
             this.businessCompanyDataGridViewTextBoxColumn.ReadOnly = true;
+            this.businessCompanyDataGridViewTextBoxColumn.Width = 125;
             // 
             // companyPositionDataGridViewTextBoxColumn
             // 
             this.companyPositionDataGridViewTextBoxColumn.DataPropertyName = "CompanyPosition";
             this.companyPositionDataGridViewTextBoxColumn.HeaderText = "CompanyPosition";
+            this.companyPositionDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.companyPositionDataGridViewTextBoxColumn.Name = "companyPositionDataGridViewTextBoxColumn";
             this.companyPositionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.companyPositionDataGridViewTextBoxColumn.Width = 125;
             // 
             // dataSetContact
             // 
@@ -218,11 +237,13 @@ namespace TaskControlSql.View
             // 
             // ManageContactScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 372);
+            this.ClientSize = new System.Drawing.Size(679, 458);
             this.Controls.Add(this.groupBoxContact);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "ManageContactScreen";
             this.Text = "Manage Contact";

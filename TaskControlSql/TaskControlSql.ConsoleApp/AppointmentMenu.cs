@@ -60,14 +60,14 @@ namespace TaskControlSql.ConsoleApp
             if (!startTimeTxt.Contains(":") || !DateTime.TryParse(startTimeTxt, out DateTime startTime))
                 throw new ArgumentException("Attribute meetingDate must a valid DateTime hours and minutes.");
 
-            startTime = meetingDate.AddMinutes(startTime.Hour + startTime.Minute);      //not returning the hours yet
+            startTime = meetingDate.AddHours(startTime.Hour).AddMinutes(startTime.Minute);
 
             Console.WriteLine(" - Enter the ending time of the appoiment:");
             string endTimeTxt = Console.ReadLine();
             if (!endTimeTxt.Contains(":") || !DateTime.TryParse(endTimeTxt, out DateTime endTime))
                 throw new ArgumentException("Attribute meetingDate must a valid DateTime hours and minutes.");
 
-            endTime = meetingDate.AddMinutes(endTime.Hour + endTime.Minute);        //not returning the hours yet
+            endTime = meetingDate.AddHours(endTime.Hour).AddMinutes(endTime.Minute);
 
             Appointment appointment = new Appointment(id, contact, meetingSubject, isRemoteMeeting, meetingPlace, meetingDate, startTime, endTime);
             return appointment;

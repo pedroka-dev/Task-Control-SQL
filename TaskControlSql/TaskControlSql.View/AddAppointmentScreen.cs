@@ -9,7 +9,7 @@ namespace TaskControlSql.View
     public partial class AddAppointmentScreen : Form
     {
         AppointmentController mainController;
-   
+
 
         public AddAppointmentScreen(AppointmentController mainController)
         {
@@ -17,7 +17,7 @@ namespace TaskControlSql.View
             InitializeComponent();
             List<Contact> contacts = mainController.contactController.ReceiveAllEntities();
 
-            foreach(Contact item in contacts)
+            foreach (Contact item in contacts)
             {
                 cmbContact.Items.Add(item.Id);
             }
@@ -33,7 +33,7 @@ namespace TaskControlSql.View
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to save a new Appointment?", "Confirmation needed", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                
+
                 Contact contact = null;
                 if (cmbContact.SelectedItem != null)
                     contact = mainController.contactController.ReceiveEntity(int.Parse(cmbContact.SelectedItem.ToString()));

@@ -18,7 +18,7 @@ namespace TaskControlSql.View
             InitializeComponent();
             List<Contact> contacts = mainController.contactController.ReceiveAllEntities();
 
-            foreach(Contact item in contacts)
+            foreach (Contact item in contacts)
             {
                 cmbContact.Items.Add(item.Id);
             }
@@ -43,7 +43,7 @@ namespace TaskControlSql.View
             DialogResult dialogResult = MessageBox.Show("Are you sure you want to save the edited Appointment?", "Confirmation needed", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                
+
                 Contact contact = null;
                 if (cmbContact.SelectedItem != null)
                     contact = mainController.contactController.ReceiveEntity(int.Parse(cmbContact.SelectedItem.ToString()));
@@ -54,8 +54,8 @@ namespace TaskControlSql.View
                 DateTime startTimeAux = dateStartTime.Value;
                 DateTime endTimeAux = dateEndTime.Value;
 
-                DateTime startTime = meetingDate.AddMinutes(startTimeAux.Hour + startTimeAux.Minute);       //not returning the hours yet
-                DateTime endTime = meetingDate.AddMinutes(endTimeAux.Hour + endTimeAux.Minute);             //not returning the hours yet
+                DateTime startTime = meetingDate.AddHours(startTimeAux.Hour).AddMinutes(startTimeAux.Minute);
+                DateTime endTime = meetingDate.AddHours(endTimeAux.Hour).AddMinutes(endTimeAux.Minute);
 
                 Appointment appointment = new Appointment(entityId, contact, meetingSubject, isRemoteMeeting, meetingPlace, meetingDate, startTime, endTime);
 
