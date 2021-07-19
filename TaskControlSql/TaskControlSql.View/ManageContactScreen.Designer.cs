@@ -34,6 +34,12 @@ namespace TaskControlSql.View
             this.btnDeleteEntity = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dataGridContact = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.businessCompanyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.companyPositionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataSetContact = new System.Data.DataSet();
             this.dtContact = new System.Data.DataTable();
             this.dataColumn1 = new System.Data.DataColumn();
@@ -42,12 +48,6 @@ namespace TaskControlSql.View
             this.dataColumn4 = new System.Data.DataColumn();
             this.dataColumn5 = new System.Data.DataColumn();
             this.dataColumn6 = new System.Data.DataColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.businessCompanyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.companyPositionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxContact.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridContact)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSetContact)).BeginInit();
@@ -73,7 +73,7 @@ namespace TaskControlSql.View
             this.btnEdit.Location = new System.Drawing.Point(194, 300);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(98, 32);
-            this.btnEdit.TabIndex = 3;
+            this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -84,7 +84,7 @@ namespace TaskControlSql.View
             this.btnDeleteEntity.Location = new System.Drawing.Point(367, 300);
             this.btnDeleteEntity.Name = "btnDeleteEntity";
             this.btnDeleteEntity.Size = new System.Drawing.Size(98, 32);
-            this.btnDeleteEntity.TabIndex = 2;
+            this.btnDeleteEntity.TabIndex = 3;
             this.btnDeleteEntity.Text = "Delete";
             this.btnDeleteEntity.UseVisualStyleBackColor = true;
             this.btnDeleteEntity.Click += new System.EventHandler(this.btnDeleteEntity_Click);
@@ -126,7 +126,48 @@ namespace TaskControlSql.View
             this.dataGridContact.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridContact.Size = new System.Drawing.Size(450, 264);
             this.dataGridContact.TabIndex = 0;
-            this.dataGridContact.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridTodoTask_CellContentClick);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // phoneNumberDataGridViewTextBoxColumn
+            // 
+            this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
+            this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
+            this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
+            this.phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // businessCompanyDataGridViewTextBoxColumn
+            // 
+            this.businessCompanyDataGridViewTextBoxColumn.DataPropertyName = "BusinessCompany";
+            this.businessCompanyDataGridViewTextBoxColumn.HeaderText = "BusinessCompany";
+            this.businessCompanyDataGridViewTextBoxColumn.Name = "businessCompanyDataGridViewTextBoxColumn";
+            this.businessCompanyDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // companyPositionDataGridViewTextBoxColumn
+            // 
+            this.companyPositionDataGridViewTextBoxColumn.DataPropertyName = "CompanyPosition";
+            this.companyPositionDataGridViewTextBoxColumn.HeaderText = "CompanyPosition";
+            this.companyPositionDataGridViewTextBoxColumn.Name = "companyPositionDataGridViewTextBoxColumn";
+            this.companyPositionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dataSetContact
             // 
@@ -174,48 +215,6 @@ namespace TaskControlSql.View
             // 
             this.dataColumn6.Caption = "Company Position";
             this.dataColumn6.ColumnName = "CompanyPosition";
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // nameDataGridViewTextBoxColumn
-            // 
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // phoneNumberDataGridViewTextBoxColumn
-            // 
-            this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
-            this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
-            this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
-            this.phoneNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // businessCompanyDataGridViewTextBoxColumn
-            // 
-            this.businessCompanyDataGridViewTextBoxColumn.DataPropertyName = "BusinessCompany";
-            this.businessCompanyDataGridViewTextBoxColumn.HeaderText = "BusinessCompany";
-            this.businessCompanyDataGridViewTextBoxColumn.Name = "businessCompanyDataGridViewTextBoxColumn";
-            this.businessCompanyDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // companyPositionDataGridViewTextBoxColumn
-            // 
-            this.companyPositionDataGridViewTextBoxColumn.DataPropertyName = "CompanyPosition";
-            this.companyPositionDataGridViewTextBoxColumn.HeaderText = "CompanyPosition";
-            this.companyPositionDataGridViewTextBoxColumn.Name = "companyPositionDataGridViewTextBoxColumn";
-            this.companyPositionDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ManageContactScreen
             // 

@@ -46,18 +46,18 @@ namespace TaskControlSql.View
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //AddContactScreen addEntityScreen = new AddContactScreen(mainController);
-            //addEntityScreen.ShowDialog();
-            //LoadEntitiesToDatagrid();
+            AddContactScreen addEntityScreen = new AddContactScreen(mainController);
+            addEntityScreen.ShowDialog();
+            LoadEntitiesToDatagrid();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //int selectedIndex = listEntities.ElementAt(dataGridContact.CurrentCell.RowIndex).Id;
-            //Contact contact = mainController.ReceiveEntity(selectedIndex);
-            //EditContactScreen editEntityScreen = new EditContactScreen(contact, mainController);
-            //editEntityScreen.ShowDialog();
-            //LoadEntitiesToDatagrid();
+            int selectedIndex = listEntities.ElementAt(dataGridContact.CurrentCell.RowIndex).Id;
+            Contact contact = mainController.ReceiveEntity(selectedIndex);
+            EditContactScreen editEntityScreen = new EditContactScreen(contact, mainController);
+            editEntityScreen.ShowDialog();
+            LoadEntitiesToDatagrid();
         }
 
         private void btnDeleteEntity_Click(object sender, EventArgs e)
@@ -81,11 +81,6 @@ namespace TaskControlSql.View
                     LoadEntitiesToDatagrid();
                 }
             }
-        }
-
-        private void dataGridTodoTask_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

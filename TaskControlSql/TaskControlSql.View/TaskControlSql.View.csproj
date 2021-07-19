@@ -65,6 +65,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditContactScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditContactScreen.Designer.cs">
+      <DependentUpon>EditContactScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddContactScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddContactScreen.Designer.cs">
+      <DependentUpon>AddContactScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditTodoTaskScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +109,12 @@
     <Compile Include="ManageTodoTaskScreen.Designer.cs">
       <DependentUpon>ManageTodoTaskScreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditContactScreen.resx">
+      <DependentUpon>EditContactScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddContactScreen.resx">
+      <DependentUpon>AddContactScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditTodoTaskScreen.resx">
       <DependentUpon>EditTodoTaskScreen.cs</DependentUpon>
     </EmbeddedResource>
