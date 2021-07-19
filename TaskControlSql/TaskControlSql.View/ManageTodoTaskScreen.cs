@@ -55,8 +55,8 @@ namespace TaskControlSql.View
         {
             int selectedIndex = listEntities.ElementAt(dataGridTodoTask.CurrentCell.RowIndex).Id;
             TodoTask todoTask = mainController.ReceiveEntity(selectedIndex);
-            EditTodoTaskScreen editTodoTaskScreen = new EditTodoTaskScreen(todoTask, mainController);
-            editTodoTaskScreen.ShowDialog();
+            EditTodoTaskScreen editEntityScreen = new EditTodoTaskScreen(todoTask, mainController);
+            editEntityScreen.ShowDialog();
             LoadEntitiesToDatagrid();
         }
 

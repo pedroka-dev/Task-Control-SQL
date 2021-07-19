@@ -25,11 +25,6 @@ namespace TaskControlSql.View
             InitializeComponent();
         }
 
-        private void ScheduleControlScreen_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnManageTasks_Click(object sender, EventArgs e)
         {
             ManageTodoTaskScreen menuScreen = new ManageTodoTaskScreen(taskController);
@@ -38,7 +33,8 @@ namespace TaskControlSql.View
 
         private void btnManageContacts_Click(object sender, EventArgs e)
         {
-
+            ManageContactScreen menuScreen = new ManageContactScreen(contactController);
+            menuScreen.ShowDialog();
         }
 
         private void btnManageAppoitments_Click(object sender, EventArgs e)

@@ -91,7 +91,6 @@ namespace TaskControlSql.View
             this.MaximizeBox = false;
             this.Name = "MainScreen";
             this.Text = "Schedule Control";
-            this.Load += new System.EventHandler(this.ScheduleControlScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
